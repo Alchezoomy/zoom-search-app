@@ -1,38 +1,84 @@
-.App {
+@font-face {
+  font-family: LatoRegular;
+  src: url('./fonts/Lato-Regular.ttf')
+}
+
+@font-face {
+  font-family: LatoLight;
+  src: url('./fonts/Lato-Light.ttf')
+}
+
+@font-face {
+  font-family: LatoBold;
+  src: url('./fonts/Lato-Bold.ttf')
+}
+
+.header {
+  padding: 1.5%;
+  background-color: #2D8CFF;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.alchezoomy {
+  font-family: LatoLight;
+  font-size: 4em;
+  color: #414155;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.zoom-logo {
+  width: 2.5em;
+  margin-right: .5%;
+  margin-left: .5%;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.landing {
+  font-family: LatoRegular;
+  text-align: center;
+}
+
+.landing-tagline {
+  font-family: LatoBold;
+  font-size: 3em;
+}
+
+.landing-description {
+  margin-bottom: 7%;
+  font-family: LatoLight;
+}
+
+.box {
+  margin: 0 auto;
+  width: 30em;
+  height: 20em;
+  border: solid 2px #2D8CFF;
+  border-radius: 20px;
+}
+
+.teacher-button {
+  width: 50%;
+  height: 25%;
+  margin: 11%;
+  font-family: LatoLight;
+  font-size: 2em;
+  background-color: white;
+  color: #2D8CFF;
+  border: solid 1px #2D8CFF;
+  border-radius: 10px;
+}
+
+.student-button {
+  width: 50%;
+  height: 25%;
+  font-family: LatoLight;
+  font-size: 2em;
+  background-color: white;
+  color: #2D8CFF;
+  border: solid 1px #2D8CFF;
+  border-radius: 10px;
+}
+
+.teacher-button:hover, .student-button:hover {
+  background-color: #2D8CFF;
   color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  transition-duration: 1s;
 }

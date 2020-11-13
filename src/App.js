@@ -6,6 +6,7 @@ import {
   Link,
 } from 'react-router-dom';
 import './App.css';
+import Header from './Header.js'
 import LandingPage from './LandingPage.js'
 import Login from './Login.js'
 import Student from './Student.js'
@@ -16,6 +17,7 @@ export default class App extends Component {
   render() {
     return (
       <div>
+        <Header />
         <Router>
           <Switch>
             <Route exact path='/'
