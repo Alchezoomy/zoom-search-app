@@ -81,4 +81,5 @@
   background-color: #2D8CFF;
   color: white;
   transition-duration: 1s;
+  cursor: crosshair;
 }
