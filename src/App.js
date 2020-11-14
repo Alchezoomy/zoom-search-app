@@ -2,16 +2,17 @@ import React, { Component } from 'react'
 import {
   BrowserRouter as Router,
   Route,
-  Switch,
-  //Link,
+  Switch
 } from 'react-router-dom';
 import './App.css';
 import Header from './Header.js'
 import LandingPage from './LandingPage.js'
 import Login from './Login.js'
 import Student from './Student.js'
+import SignUp from './SignUp.js'
 import Teacher from './Teacher.js'
 import AboutUs from './AboutUs.js'
+import Footer from './Footer';
 
 export default class App extends Component {
   render() {
@@ -32,6 +33,10 @@ export default class App extends Component {
             render={(routerProps) =>
             <Student {...routerProps} />} />
 
+            <Route exact path='/signup'
+            render={(routerProps) =>
+            <SignUp {...routerProps} />} />
+
             <Route exact path='/teacher'
             render={(routerProps) =>
             <Teacher {...routerProps} />} />
@@ -40,6 +45,7 @@ export default class App extends Component {
             render={(routerProps) =>
             <AboutUs {...routerProps} />} />
           </Switch>
+          <Footer />
         </Router>
       </div>
     )

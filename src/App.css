@@ -13,6 +13,10 @@
   src: url('./fonts/Lato-Bold.ttf')
 }
 
+html, body {
+  height: 100%;
+}
+
 .header {
   padding: 1.5%;
   background-color: #2D8CFF;
@@ -22,7 +26,7 @@
 .alchezoomy {
   font-family: LatoLight;
   font-size: 4em;
-  color: #414155;
+  color: #232333;
 }
 
 .zoom-logo {
@@ -34,6 +38,7 @@
 .landing {
   font-family: LatoRegular;
   text-align: center;
+  color: #232333;
 }
 
 .landing-tagline {
@@ -55,18 +60,10 @@
 }
 
 .teacher-button {
-  width: 50%;
-  height: 25%;
-  margin: 11%;
-  font-family: LatoLight;
-  font-size: 2em;
-  background-color: white;
-  color: #2D8CFF;
-  border: solid 1px #2D8CFF;
-  border-radius: 10px;
+  margin: 11%
 }
 
-.student-button {
+.teacher-button, .student-button {
   width: 50%;
   height: 25%;
   font-family: LatoLight;
@@ -77,9 +74,87 @@
   border-radius: 10px;
 }
 
-.teacher-button:hover, .student-button:hover {
+.teacher-button:hover, .student-button:hover, .login-button:hover {
   background-color: #2D8CFF;
   color: white;
   transition-duration: 1s;
   cursor: crosshair;
+}
+
+.login {
+  text-align: center;
+  font-family: LatoRegular;
+}
+
+.student-login {
+  margin: 5%;
+  font-family: LatoBold;
+  font-size: 2em;
+  color: #232333;
+}
+
+.email {
+  margin-top: 8%;
+}
+
+.email, .password {
+  margin-bottom: 2%;
+  font-size: 1.3em;
+}
+
+input {
+  width: 50%;
+  height: 25%;
+  font-family: LatoLight;
+  font-size: 1.2em;
+  caret-color: #2D8CFF;
+  border: solid 1px #2D8CFF;
+  border-radius: 5px;
+}
+
+.login-button {
+  margin-top: 4%;
+  height: 25%;
+  width: 20%;
+  font-size: 1.1em;
+  background-color: white;
+  color: #2D8CFF;
+  border: solid 1px #2D8CFF;
+  border-radius: 10px;
+}
+
+.sign-up {
+  margin-top: 12%;
+  color: #232333;
+}
+
+.link {
+  text-decoration: none;
+  color: #2D8CFF;
+}
+
+.link:hover, .footer-link:hover {
+  text-decoration: underline;
+}
+
+.footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 1.2em;
+  padding: .7em;
+  background-color: #747487;
+  text-align: right;
+  font-family: LatoLight;
+  font-size: 1em;
+}
+
+.footer-link {
+  color: white;
+  text-decoration: none;
+}
+
+.footer-text {
+  padding: .5em;
 }
