@@ -30,9 +30,9 @@ html, body {
 }
 
 .zoom-logo {
+  position: inline;
+  margin-bottom: -.7%;
   width: 2.5em;
-  margin-right: .5%;
-  margin-left: .5%;
 }
 
 .landing {
@@ -135,6 +135,7 @@ input {
 
 .link:hover, .footer-link:hover {
   text-decoration: underline;
+  cursor: crosshair;
 }
 
 .footer {
