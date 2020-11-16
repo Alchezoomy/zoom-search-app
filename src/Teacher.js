@@ -22,7 +22,7 @@ export default class Teacher extends Component {
         return (
             <div className='teacher'>
                 {this.state.loading
-                ? <img src='/loading spinner.gif' alt='loading spinner' />
+                ? <img src='/loading-spinner.gif' alt='loading spinner' />
                 : <p>test passed</p>
                 }
             </div>
