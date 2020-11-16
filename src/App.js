@@ -8,6 +8,7 @@ import './App.css';
 import Header from './Header.js'
 import LandingPage from './LandingPage.js'
 import Login from './Login.js'
+import TeacherLogin from './TeacherLogin.js'
 import Student from './Student.js'
 import SignUp from './SignUp.js'
 import Teacher from './Teacher.js'
@@ -15,6 +16,14 @@ import AboutUs from './AboutUs.js'
 import Footer from './Footer';
 
 export default class App extends Component {
+  state = {
+    code: ''
+  }
+
+  handleSetState = (stateObject) => {
+    this.setState(stateObject);
+  }
+
   render() {
     return (
       <div>
@@ -29,6 +38,11 @@ export default class App extends Component {
             render={(routerProps) =>
             <Login {...routerProps} />} />
 
+            <Route exact path='/redirect'
+            render={(routerProps) =>
+            <TeacherLogin {...routerProps}
+            handleSetState={this.handleSetState} />} />
+
             <Route exact path='/student'
             render={(routerProps) =>
             <Student {...routerProps} />} />
@@ -39,7 +53,9 @@ export default class App extends Component {
 
             <Route exact path='/teacher'
             render={(routerProps) =>
-            <Teacher {...routerProps} />} />
+            <Teacher {...routerProps} 
+            code={this.state.code} />}
+            />
 
             <Route exact path='/aboutus'
             render={(routerProps) =>
