@@ -53,7 +53,9 @@ export default class App extends Component {
 
             <Route exact path='/teacher'
             render={(routerProps) =>
-            <Teacher {...routerProps} />} />
+            <Teacher {...routerProps} 
+            code={this.state.code} />}
+            />
 
             <Route exact path='/aboutus'
             render={(routerProps) =>
