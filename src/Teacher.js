@@ -10,7 +10,7 @@ export default class Teacher extends Component {
     componentDidMount = async () => {
         const URL = 'https://alchezoomy.herokuapp.com/oauth';
         try {
-            const returnedObject = await fetch.post(URL).send({ token: this.props.baseState.code });
+            const returnedObject = await fetch.post(URL).send({ token: this.props.code });
             this.setState({
                 returnedObject: returnedObject.body,
                 loading: false
