@@ -74,7 +74,7 @@ html, body {
   border-radius: 10px;
 }
 
-.teacher-button:hover, .student-button:hover, .login-button:hover {
+.teacher-button:hover, .student-button:hover, .login-button:hover, .search:hover, .sort:hover {
   background-color: #2D8CFF;
   color: white;
   transition-duration: 1s;
@@ -136,6 +136,97 @@ input {
 .link:hover, .footer-link:hover {
   text-decoration: underline;
   cursor: crosshair;
+}
+
+.spinner {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.student-dashboard {
+  font-family: LatoRegular;
+  color: #232333;
+  text-align: center;
+}
+
+.left-nav {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 20%;
+  height: 100%;
+  text-align: left;
+  background-color: #BABACC;
+  z-index: -1;
+}
+
+.left-nav-text {
+  margin-top: 6.5em;
+}
+
+.user-email {
+  position: absolute;
+  margin-top: 5%;
+  margin-left: 6%;
+  font-size: 2.5vw;
+}
+
+.logout {
+  margin-top: 15%;
+}
+
+.logout, .fav, .arc {
+  font-size: 2vw;
+  margin-left: 6%;
+}
+
+.dashboard {
+  font-family: LatoBold;
+  margin-top: 2%;
+  margin-left: 20%;
+  font-size: 3.5vw;
+}
+
+.search-and-sort {
+  position: absolute;
+  text-align: right;
+  width: 30%;
+  right: 5%;
+}
+.searchbar {
+  width: 70%;
+  height: 1.7em;
+}
+
+.search {
+  margin-left: 1%;
+  padding: 1%;
+  width: 20%;
+  height: 1.6em;
+  font-size: 1.1em;
+  background-color: white;
+  color: #2D8CFF;
+  border: solid 1px #2D8CFF;
+  border-radius: 5px;
+}
+
+.sort {
+  margin-top: 2%;
+  background-color: white;
+  color: #2D8CFF;
+  border: solid 1px #2D8CFF;
+  border-radius: 5px;
+}
+
+.video-list {
+  display: block;
+  margin-top: 10%;
+  margin-left: 30%;
+  margin-right: auto;
+  width: 60%;
+  height: 500px;
+  border: solid 1px #2D8CFF;
 }
 
 .footer {
