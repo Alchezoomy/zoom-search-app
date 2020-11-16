@@ -16,6 +16,14 @@ import AboutUs from './AboutUs.js'
 import Footer from './Footer';
 
 export default class App extends Component {
+  state = {
+    code: ''
+  }
+
+  handleSetState = (stateObject) => {
+    this.setState(stateObject);
+  }
+
   render() {
     return (
       <div>
@@ -30,9 +38,10 @@ export default class App extends Component {
             render={(routerProps) =>
             <Login {...routerProps} />} />
 
-            <Route exact path='/teacherlogin'
+            <Route exact path='/redirect'
             render={(routerProps) =>
-            <TeacherLogin {...routerProps} />} />
+            <TeacherLogin {...routerProps}
+            handleSetState={this.handleSetState} />} />
 
             <Route exact path='/student'
             render={(routerProps) =>
