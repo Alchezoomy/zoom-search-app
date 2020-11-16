@@ -59,11 +59,7 @@ html, body {
   border-radius: 20px;
 }
 
-.teacher-button {
-  margin: 11%
-}
-
-.teacher-button, .student-button {
+.student-button {
   width: 50%;
   height: 25%;
   font-family: LatoLight;
@@ -74,7 +70,7 @@ html, body {
   border-radius: 10px;
 }
 
-.teacher-button:hover, .student-button:hover, .login-button:hover, .search:hover, .sort:hover {
+.student-button:hover, .login-button:hover, .signup-button:hover, .search:hover, .sort:hover {
   background-color: #2D8CFF;
   color: white;
   transition-duration: 1s;
@@ -86,7 +82,7 @@ html, body {
   font-family: LatoRegular;
 }
 
-.student-login {
+.student-login, .student-signup {
   margin: 5%;
   font-family: LatoBold;
   font-size: 2em;
@@ -112,7 +108,7 @@ input {
   border-radius: 5px;
 }
 
-.login-button {
+.login-button, .signup-button {
   margin-top: 4%;
   height: 25%;
   width: 20%;
@@ -136,6 +132,10 @@ input {
 .link:hover, .footer-link:hover {
   text-decoration: underline;
   cursor: crosshair;
+}
+
+.sign-up-page {
+  text-align: center;
 }
 
 .spinner {

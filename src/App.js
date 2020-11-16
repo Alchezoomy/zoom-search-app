@@ -7,7 +7,6 @@ import {
 import './App.css';
 import Header from './Header.js'
 import LandingPage from './LandingPage.js'
-import Login from './Login.js'
 import Student from './Student.js'
 import SignUp from './SignUp.js'
 import AboutUs from './AboutUs.js'
@@ -31,10 +30,6 @@ export default class App extends Component {
             <Route exact path='/'
             render={(routerProps) =>
             <LandingPage {...routerProps} />} />
-            
-            <Route exact path='/login'
-            render={(routerProps) =>
-            <Login {...routerProps} />} />
 
             <Route exact path='/student'
             render={(routerProps) =>
