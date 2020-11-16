@@ -14,8 +14,32 @@ import Footer from './Footer';
 
 export default class App extends Component {
   state = {
-    code: ''
+    code: '',
+    username: localStorage.getItem('USERNAME') || '',
+    token: localStorage.getItem('TOKEN') || '',
   }
+
+  changeTokenAndUsername = (name, token) => {
+    localStorage.setItem('TOKEN', token);
+    localStorage.setItem('USERNAME', name);
+
+    this.setState({
+      username: name,
+      token: token
+    })
+  }
+
+  logOut = () => {
+    localStorage.setItem('TOKEN', '');
+    localStorage.setItem('USERNAME', '');
+
+    this.setState({
+      username: '',
+      token: ''
+    })
+
+  }
+
 
   handleSetState = (stateObject) => {
     this.setState(stateObject);
@@ -28,20 +52,26 @@ export default class App extends Component {
         <Router>
           <Switch>
             <Route exact path='/'
-            render={(routerProps) =>
-            <LandingPage {...routerProps} />} />
+              render={(routerProps) =>
+                <LandingPage
+                  changeTokenAndUsername={this.changeTokenAndUsername}
+                  {...routerProps} />} />
 
             <Route exact path='/student'
-            render={(routerProps) =>
-            <Student {...routerProps} />} />
+              render={(routerProps) =>
+                <Student
+                  {...routerProps} />}
+              logOut={this.logOut} />
 
             <Route exact path='/signup'
-            render={(routerProps) =>
-            <SignUp {...routerProps} />} />
+              render={(routerProps) =>
+                <SignUp
+                  changeTokenAndUsername={this.changeTokenAndUsername}
+                  {...routerProps} />} />
 
             <Route exact path='/aboutus'
-            render={(routerProps) =>
-            <AboutUs {...routerProps} />} />
+              render={(routerProps) =>
+                <AboutUs {...routerProps} />} />
           </Switch>
           <Footer />
         </Router>
