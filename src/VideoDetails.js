@@ -1,6 +1,30 @@
 import React, { Component } from 'react'
+import {
+
+    fetchVideo,
+    favoriteVideo,
+    searchPublishedVideos,
+
+
+} from './Fetches.js';
 
 export default class VideoDetails extends Component {
+
+    state = {
+        loading: true,
+        video: [],
+        search: '',
+    }
+    handleFavorite = async (e) => {
+        await favoriteVideo(e.target.value, this.props.token);
+
+    }
+    componentDidMount = async () => {
+        const video = await fetchVideo(this.props.match.params.id, this.props.token)
+        this.setState({
+            video: video,
+        })
+    }
     render() {
         return (
             <div className='video-details'>
@@ -15,6 +39,13 @@ export default class VideoDetails extends Component {
                 </div>
                 <div className='video-detail'>
                     <div className='video'></div>
+
+                    <div>
+
+                        <div> {this.state.video.uuid} </div>
+
+                    </div>
+
                     <div className='chat'></div>
                 </div>
                 <div className='buttons'>

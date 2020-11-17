@@ -67,12 +67,13 @@ export default class Student extends Component {
                 </div>
                 <div className='video-list'>
                     {this.state.allVideos.map(video =>
-                        <Link to={`/meeting/${video.uuid}`}> <div>
+                        <div>  <Link to={`/meeting/${video.uuid}`}>
 
                             <div> {video.uuid} </div>
-                            <div value={video.uuid} onClick={this.handleFavorite}>Favorite</div>
-                        </div>
                         </Link>
+                            {/* <div value={video.uuid} onClick={this.handleFavorite}>Favorite</div> */}
+                        </div>
+
 
                     )
                     }

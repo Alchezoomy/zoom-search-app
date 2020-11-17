@@ -18,12 +18,12 @@ export default class LandingPage extends Component {
         const user = await request
             .post('https://alchezoomy.herokuapp.com/auth/signin')
             .send(this.state);
-
+        this.props.history.push('/student')
         this.setState({ loading: false })
 
         this.props.changeTokenAndUsername(user.body.email, user.body.token);
 
-        this.props.history.push('/student');
+        ;
     }
 
     render() {
