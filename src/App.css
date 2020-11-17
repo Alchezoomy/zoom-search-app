@@ -13,6 +13,10 @@
   src: url('./fonts/Lato-Bold.ttf')
 }
 
+* {
+  margin: 0;
+}
+
 html, body {
   height: 100%;
 }
@@ -150,60 +154,60 @@ input {
   text-align: center;
 }
 
-.left-nav {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  width: 20%;
-  height: 100%;
-  text-align: left;
+.dash-menu {
+  cursor: crosshair;
+  width: 12%;
+  padding: 1%;
+  margin-top: 1%;
+  margin-left: 1%;
+  font-size: 1.5em;
   background-color: #BABACC;
-  z-index: -1;
 }
 
-.left-nav-text {
-  margin-top: 6.5em;
+.dash-menu:hover, .dash:hover, .logout:hover, .fav:hover, .arc:hover {
+  cursor: crosshair;
+  color: white;
+  background-color: #2D8CFF;
+  transition-duration: 1s;
 }
 
-.user-email {
-  position: absolute;
-  margin-top: 5%;
-  margin-left: 6%;
-  font-size: 1.5vw;
+.content {
+  float: left;
+  width: 14%;
+  margin-left: 1%;
+  background-color: #BABACC;
 }
 
-.logout {
-  margin-top: 15%;
-}
-
-.logout, .fav, .arc {
+.dash, .logout, .fav, .arc {
   font-size: 2vw;
-  margin-left: 6%;
+  padding-top: .5em;
+  padding-bottom: .5em;
 }
 
 .dashboard {
+  position: absolute;
   font-family: LatoBold;
-  margin-top: 2%;
+  margin-top: -2%;
   margin-left: 20%;
   font-size: 3.5vw;
 }
 
 .search-and-sort {
   position: absolute;
+  margin-top: -2%;
   text-align: right;
   width: 30%;
   right: 5%;
 }
 .searchbar {
   width: 70%;
-  height: 1.7em;
+  height: 1.2em;
 }
 
 .search {
   margin-left: 1%;
-  padding: 1%;
   width: 25%;
-  height: 1.8em;
+  line-height: 1em;
   font-size: 2vw;
   background-color: white;
   color: #2D8CFF;
@@ -213,6 +217,7 @@ input {
 
 .sort {
   margin-top: 2%;
+  font-size: 1.4vw;
   background-color: white;
   color: #2D8CFF;
   border: solid 1px #2D8CFF;
@@ -221,11 +226,12 @@ input {
 
 .video-list {
   display: block;
-  margin-top: 12%;
-  margin-left: 30%;
+  margin-top: 7%;
+  margin-left: auto;
   margin-right: auto;
+  margin-bottom: 5%;
   width: 60%;
-  height: 400px;
+  height: 30em;
   border: solid 1px #2D8CFF;
 }
 
@@ -254,10 +260,9 @@ input {
 
 
 .footer {
-  position: absolute;
-  left: 0;
+  position: relative;
+  width: 100%;
   bottom: 0;
-  right: 0;
   height: 1.2em;
   padding: .7em;
   background-color: #747487;
@@ -267,6 +272,7 @@ input {
 }
 
 .footer-link {
+  margin-right: 2%;
   color: white;
   text-decoration: none;
 }

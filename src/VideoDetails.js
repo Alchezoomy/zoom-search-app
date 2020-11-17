@@ -49,9 +49,9 @@ export default class VideoDetails extends Component {
                     <div className='chat'></div>
                 </div>
                 <div className='buttons'>
-                    <button>Thumbs Up</button>
-                    <button>Thumbs Down</button>
-                    <button>Favorite</button>
+                    <button className="thumbs-up">Thumbs Up</button>
+                    <button className="thumbs-down">Thumbs Down</button>
+                    <button className='favorite-button'>Favorite</button>
                 </div>
             </div>
         )

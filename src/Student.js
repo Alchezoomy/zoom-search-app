@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import DashMenu from './DashMenu.js'
 
 import {
 
@@ -9,8 +10,6 @@ import {
 
 
 } from './Fetches.js';
-
-
 
 export default class Student extends Component {
 
@@ -44,13 +43,7 @@ export default class Student extends Component {
         return (
             <div className='student-dashboard'>
                 <div className='left-nav'>
-                    <div className='left-nav-text'>
-                        <span className='user-email'>user@user.com</span>
-                        <br />
-                        <div onClick={this.props.logOut} className='logout'>Log Out</div>
-                        <p className='fav'>Favorites</p>
-                        <p className='arc'>Archives</p>
-                    </div>
+                    <DashMenu />
                 </div>
                 <h3 className='dashboard'>Student Dashboard</h3>
                 <div className='search-and-sort'>
