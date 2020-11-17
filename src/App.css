@@ -169,7 +169,7 @@ input {
   position: absolute;
   margin-top: 5%;
   margin-left: 6%;
-  font-size: 2.5vw;
+  font-size: 1.5vw;
 }
 
 .logout {
@@ -202,9 +202,9 @@ input {
 .search {
   margin-left: 1%;
   padding: 1%;
-  width: 20%;
-  height: 1.6em;
-  font-size: 1.1em;
+  width: 25%;
+  height: 1.8em;
+  font-size: 2vw;
   background-color: white;
   color: #2D8CFF;
   border: solid 1px #2D8CFF;
@@ -221,13 +221,37 @@ input {
 
 .video-list {
   display: block;
-  margin-top: 10%;
+  margin-top: 12%;
   margin-left: 30%;
   margin-right: auto;
   width: 60%;
-  height: 500px;
+  height: 400px;
   border: solid 1px #2D8CFF;
 }
+
+.video {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5%;
+  width: 50%;
+  height: 25em;
+  background-color: #232333;
+}
+
+.chat {
+  float: right;
+  margin-right: 3%;
+  margin-top: -33.4%;
+  width: 20%;
+  height: 25em;
+  border: solid 1px #232333;
+}
+
+.buttons {
+  margin-left: 50%;
+}
+
 
 .footer {
   position: absolute;
