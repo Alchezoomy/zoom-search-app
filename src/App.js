@@ -28,7 +28,7 @@ export default class App extends Component {
 
     this.setState({
       username: name,
-      token: token
+      token: token,
     })
   }
 
@@ -38,9 +38,11 @@ export default class App extends Component {
 
     this.setState({
       username: '',
-      token: ''
-    })
+      token: '',
 
+
+    })
+    this.props.history.push('/')
   }
 
   handleSetState = (stateObject) => {
@@ -56,39 +58,69 @@ export default class App extends Component {
             <Route exact path='/'
               render={(routerProps) =>
                 <LandingPage
+
+                  {...routerProps}
                   changeTokenAndUsername={this.changeTokenAndUsername}
-                  {...routerProps} />} />
+                />
+              }
+
+            />
 
             <Route exact path='/student'
               render={(routerProps) =>
                 <Student
-                  {...routerProps} />}
-              logOut={this.logOut} />
+
+                  {...routerProps}
+                  token={this.state.token}
+                  logOut={this.logOut}
+                />
+              }
+
+            />
 
             <Route exact path='/archives'
-            render={(routerProps) =>
-                <Archives 
-                {...routerProps} />} />
+              render={(routerProps) =>
+                <Archives
+                  {...routerProps}
+                />
+              }
+            />
 
             <Route exact path='/favorites'
-            render={(routerProps) =>
-                <Favorites 
-                {...routerProps} />} />
+              render={(routerProps) =>
+                <Favorites
+                  {...routerProps}
+                />
+              }
+            />
 
             <Route exact path='/meeting/:id'
-            render={(routerProps) =>
-                <VideoDetails 
-                {...routerProps} />} />
+              render={(routerProps) =>
+                <VideoDetails
+
+                  {...routerProps}
+                  token={this.state.token}
+                />
+              }
+
+            />
 
             <Route exact path='/signup'
               render={(routerProps) =>
                 <SignUp
+
+                  {...routerProps}
                   changeTokenAndUsername={this.changeTokenAndUsername}
-                  {...routerProps} />} />
+                />
+              }
+            />
 
             <Route exact path='/aboutus'
               render={(routerProps) =>
-                <AboutUs {...routerProps} />} />
+                <AboutUs {...routerProps}
+                />
+              }
+            />
           </Switch>
           <Footer />
         </Router>

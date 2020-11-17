@@ -21,19 +21,19 @@ export default class Student extends Component {
 
 
     componentDidMount = async () => {
-        const allVideos = await fetchPublishedVideos()
+        const allVideos = await fetchPublishedVideos(this.props.token)
         this.setState({
             allVideos: allVideos
         })
     }
     handleFavorite = async (e) => {
-        await favoriteVideo(e.target.value);
+        await favoriteVideo(e.target.value, this.props.token);
 
     }
 
     handleSearch = async (e) => {
         e.preventDefault()
-        await searchPublishedVideos(this.state.search);
+        await searchPublishedVideos(this.state.search, this.props.token);
 
     }
 
@@ -60,12 +60,13 @@ export default class Student extends Component {
                 </div>
                 <div className='video-list'>
                     {this.state.allVideos.map(video =>
-                        <Link to={`/meeting/${video.uuid}`}> <div>
+                        <div>  <Link to={`/meeting/${video.uuid}`}>
 
                             <div> {video.uuid} </div>
-                            <div value={video.uuid} onClick={this.handleFavorite}>Favorite</div>
-                        </div>
                         </Link>
+                            {/* <div value={video.uuid} onClick={this.handleFavorite}>Favorite</div> */}
+                        </div>
+
 
                     )
                     }
