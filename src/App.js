@@ -47,11 +47,6 @@ export default class App extends Component {
   //     username: '',
   //     token: '',
 
-
-  //   })
-  //   this.props.history.push('/')
-  // }
-
   handleSetState = (stateObject) => {
     this.setState(stateObject);
   }
