@@ -22,19 +22,19 @@ export default class Student extends Component {
 
 
     componentDidMount = async () => {
-        const allVideos = await fetchPublishedVideos()
+        const allVideos = await fetchPublishedVideos(this.props.token)
         this.setState({
             allVideos: allVideos
         })
     }
     handleFavorite = async (e) => {
-        await favoriteVideo(e.target.value);
+        await favoriteVideo(e.target.value, this.props.token);
 
     }
 
     handleSearch = async (e) => {
         e.preventDefault()
-        await searchPublishedVideos(this.state.search);
+        await searchPublishedVideos(this.state.search, this.props.token);
 
     }
 
@@ -47,7 +47,7 @@ export default class Student extends Component {
                     <div className='left-nav-text'>
                         <span className='user-email'>user@user.com</span>
                         <br />
-                        <p onClick={this.props.logOut} className='logout'>Log Out</p>
+                        <div onClick={this.props.logOut} className='logout'>Log Out</div>
                         <p className='fav'>Favorites</p>
                         <p className='arc'>Archives</p>
                     </div>
