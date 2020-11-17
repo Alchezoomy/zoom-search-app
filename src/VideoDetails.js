@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import DashMenu from './DashMenu.js'
+
 import {
 
     fetchVideo,
@@ -15,34 +17,33 @@ export default class VideoDetails extends Component {
         video: [],
         search: '',
     }
-    handleFavorite = async (e) => {
-        await favoriteVideo(e.target.value, this.props.token);
 
-    }
     componentDidMount = async () => {
         const video = await fetchVideo(this.props.match.params.id, this.props.token)
         this.setState({
             video: video,
         })
     }
+    handleFavorite = async (e) => {
+        await favoriteVideo(this.state.video, this.props.token);
+
+    }
     render() {
         return (
             <div className='video-details'>
+
                 <div className='left-nav'>
-                    <div className='left-nav-text'>
-                        <span className='user-email'>user@user.com</span>
-                        <br />
-                        <p onClick={this.props.logOut} className='logout'>Log Out</p>
-                        <p className='fav'>Favorites</p>
-                        <p className='arc'>Archives</p>
-                    </div>
+                    <DashMenu
+                    />
                 </div>
+
                 <div className='video-detail'>
                     <div className='video'></div>
 
                     <div>
 
-                        <div> {this.state.video.uuid} </div>
+                        <div> {this.state.video.topic} </div>
+                        <div>{this.state.video.video_play_url}</div>
 
                     </div>
 
@@ -51,7 +52,7 @@ export default class VideoDetails extends Component {
                 <div className='buttons'>
                     <button className="thumbs-up">Thumbs Up</button>
                     <button className="thumbs-down">Thumbs Down</button>
-                    <button className='favorite-button'>Favorite</button>
+                    <button onClick={this.handleFavorite} className='favorite-button'>Favorite</button>
                 </div>
             </div>
         )

@@ -1,9 +1,14 @@
 import React, { Component } from 'react'
+
+import PrivateRoute from './PrivateRoute.js';
+
 import {
   BrowserRouter as Router,
   Route,
-  Switch
-} from 'react-router-dom';
+  Switch,
+  Link,
+} from "react-router-dom";
+
 import './App.css';
 import Header from './Header.js'
 import LandingPage from './LandingPage.js'
@@ -14,6 +19,8 @@ import VideoDetails from './VideoDetails.js'
 import SignUp from './SignUp.js'
 import AboutUs from './AboutUs.js'
 import Footer from './Footer';
+
+
 
 export default class App extends Component {
   state = {
@@ -32,17 +39,13 @@ export default class App extends Component {
     })
   }
 
-  logOut = () => {
-    localStorage.setItem('TOKEN', '');
-    localStorage.setItem('USERNAME', '');
+  // logOut = () => {
+  //   localStorage.setItem('TOKEN', '');
+  //   localStorage.setItem('USERNAME', '');
 
-    this.setState({
-      username: '',
-      token: '',
-
-    })
-    this.props.history.push('/')
-  }
+  //   this.setState({
+  //     username: '',
+  //     token: '',
 
   handleSetState = (stateObject) => {
     this.setState(stateObject);
@@ -52,20 +55,27 @@ export default class App extends Component {
     return (
       <div>
         <Header />
+
         <Router>
           <Switch>
             <Route exact path='/'
               render={(routerProps) =>
-                <LandingPage
+                <div>
 
-                  {...routerProps}
-                  changeTokenAndUsername={this.changeTokenAndUsername}
-                />
+                  <LandingPage
+
+                    {...routerProps}
+                    token={this.state.token}
+                    changeTokenAndUsername={this.changeTokenAndUsername}
+                  /></div>
               }
 
             />
 
-            <Route exact path='/student'
+            <PrivateRoute
+
+              token={this.state.token}
+              exact path='/student'
               render={(routerProps) =>
                 <Student
 
@@ -77,7 +87,10 @@ export default class App extends Component {
 
             />
 
-            <Route exact path='/archives'
+            <PrivateRoute
+              token={this.state.token}
+
+              exact path='/archives'
               render={(routerProps) =>
                 <Archives
                   {...routerProps}
@@ -85,15 +98,22 @@ export default class App extends Component {
               }
             />
 
-            <Route exact path='/favorites'
+            <PrivateRoute
+              token={this.state.token}
+
+              exact path='/favorites'
               render={(routerProps) =>
                 <Favorites
                   {...routerProps}
+                  token={this.state.token}
                 />
               }
             />
 
-            <Route exact path='/meeting/:id'
+            <PrivateRoute
+              token={this.state.token}
+
+              exact path='/meeting/:id'
               render={(routerProps) =>
                 <VideoDetails
 
@@ -109,6 +129,7 @@ export default class App extends Component {
                 <SignUp
 
                   {...routerProps}
+                  token={this.state.token}
                   changeTokenAndUsername={this.changeTokenAndUsername}
                 />
               }
