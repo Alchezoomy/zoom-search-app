@@ -40,7 +40,6 @@ export default class App extends Component {
       username: '',
       token: '',
 
-
     })
     this.props.history.push('/')
   }

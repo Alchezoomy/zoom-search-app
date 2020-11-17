@@ -13,12 +13,8 @@
   src: url('./fonts/Lato-Bold.ttf')
 }
 
-* {
-  margin: 0;
-}
-
 html, body {
-  height: 100%;
+  min-height: 100%;
 }
 
 .header {
@@ -179,9 +175,9 @@ input {
 }
 
 .dash, .logout, .fav, .arc {
-  font-size: 2vw;
-  padding-top: .5em;
-  padding-bottom: .5em;
+  font-size: 1.5vw;
+  padding-top: .3em;
+  padding-bottom: .3em;
 }
 
 .dashboard {
@@ -224,15 +220,48 @@ input {
   border-radius: 5px;
 }
 
-.video-list {
-  display: block;
-  margin-top: 7%;
-  margin-left: auto;
+.video-box {
+  display: absolute;
+  margin-top: 6%;
+  margin-left: 20%;
   margin-right: auto;
   margin-bottom: 5%;
-  width: 60%;
-  height: 30em;
+  width: 55%;
+  height: 40vw;
   border: solid 1px #2D8CFF;
+  text-decoration: none;
+  overflow-y: scroll;
+}
+
+.video-item {
+  font-family: LatoRegular;
+  border: solid 2px #747487;
+  padding-bottom: 2%;
+  color: #2D8CFF;
+}
+
+.video-item:hover {
+  background-color: #2D8CFF;
+  color: white;
+  transition-duration: 1s;
+}
+
+.meeting-link {
+  text-decoration: none;
+}
+
+.topic {
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
+.upload-date {
+  font-family: LatoLight;
+  color: #232333;
+}
+
+.video-list {
+  background-color: #E4E4ED;
 }
 
 .video {
@@ -258,11 +287,11 @@ input {
   margin-left: 50%;
 }
 
-
 .footer {
-  position: relative;
-  width: 100%;
+  position: fixed;
   bottom: 0;
+  left: 0;
+  width: 100%;
   height: 1.2em;
   padding: .7em;
   background-color: #747487;

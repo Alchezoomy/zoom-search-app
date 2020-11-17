@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import DashMenu from './DashMenu.js'
+import VideoList from './VideoList.js';
+import DashMenu from './DashMenu.js';
 
 import {
 
@@ -19,7 +19,6 @@ export default class Student extends Component {
         search: '',
     }
 
-
     componentDidMount = async () => {
         const allVideos = await fetchPublishedVideos(this.props.token)
         this.setState({
@@ -28,16 +27,12 @@ export default class Student extends Component {
     }
     handleFavorite = async (e) => {
         await favoriteVideo(e.target.value, this.props.token);
-
     }
 
     handleSearch = async (e) => {
         e.preventDefault()
         await searchPublishedVideos(this.state.search, this.props.token);
-
     }
-
-
 
     render() {
         return (
@@ -58,16 +53,12 @@ export default class Student extends Component {
                         <option >Favorites</option>
                     </select>
                 </div>
-                <div className='video-list'>
+                <div className='video-box'>
                     {this.state.allVideos.map(video =>
-                        <div>  <Link to={`/meeting/${video.uuid}`}>
-
-                            <div> {video.uuid} </div>
-                        </Link>
-                            {/* <div value={video.uuid} onClick={this.handleFavorite}>Favorite</div> */}
+                        <div key={video.video}>
+                            <VideoList 
+                            video={video} /> 
                         </div>
-
-
                     )
                     }
                 </div>
