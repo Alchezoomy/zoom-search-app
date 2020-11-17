@@ -8,6 +8,9 @@ import './App.css';
 import Header from './Header.js'
 import LandingPage from './LandingPage.js'
 import Student from './Student.js'
+import Archives from './Archives.js'
+import Favorites from './Favorites.js'
+import VideoDetails from './VideoDetails.js'
 import SignUp from './SignUp.js'
 import AboutUs from './AboutUs.js'
 import Footer from './Footer';
@@ -40,7 +43,6 @@ export default class App extends Component {
 
   }
 
-
   handleSetState = (stateObject) => {
     this.setState(stateObject);
   }
@@ -62,6 +64,21 @@ export default class App extends Component {
                 <Student
                   {...routerProps} />}
               logOut={this.logOut} />
+
+            <Route exact path='/archives'
+            render={(routerProps) =>
+                <Archives 
+                {...routerProps} />} />
+
+            <Route exact path='/favorites'
+            render={(routerProps) =>
+                <Favorites 
+                {...routerProps} />} />
+
+            <Route exact path='/meeting/:id'
+            render={(routerProps) =>
+                <VideoDetails 
+                {...routerProps} />} />
 
             <Route exact path='/signup'
               render={(routerProps) =>
