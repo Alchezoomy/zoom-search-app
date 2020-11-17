@@ -6,7 +6,6 @@ export default class Footer extends Component {
         return (
             <div className='footer'>
                 <Link to='/aboutus' className='footer-link'><span className='footer-text'>About the Team</span></Link>
-                
             </div>
         )
     }
