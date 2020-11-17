@@ -35,9 +35,11 @@ export default class App extends Component {
 
     this.setState({
       username: '',
-      token: ''
-    })
+      token: '',
 
+
+    })
+    this.props.history.push('/')
   }
 
 
@@ -60,8 +62,10 @@ export default class App extends Component {
             <Route exact path='/student'
               render={(routerProps) =>
                 <Student
+                  token={this.state.token}
+                  logOut={this.logOut}
                   {...routerProps} />}
-              logOut={this.logOut} />
+            />
 
             <Route exact path='/signup'
               render={(routerProps) =>

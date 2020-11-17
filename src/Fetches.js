@@ -11,9 +11,10 @@ const URL = 'https://alchezoomy.herokuapp.com/';
 //         throw err;
 //     }
 // }
-export async function fetchFavorites() {
+export async function fetchFavorites(token) {
     try {
-        const response = await request.get(`${URL}api/favorites`);
+        const response = await request.get(`${URL}api/favorites`)
+            .set('Authorization', token);
 
         return response.body;
     } catch (err) {
@@ -21,28 +22,20 @@ export async function fetchFavorites() {
     }
 }
 
-export async function fetchPublishedVideos() {
+export async function fetchPublishedVideos(token) {
     try {
-        const response = await request.get(`${URL}api/meetings`);
+        const response = await request.get(`${URL}api/meetings`)
+            .set('Authorization', token);
 
         return response.body;
     } catch (err) {
         throw err;
     }
 }
-export async function searchPublishedVideos(search) {
+export async function searchPublishedVideos(search, token) {
     try {
-        const response = await request.get(`${URL}api/meetings/?search=${search}`);
-
-        return response.body;
-    } catch (err) {
-        throw err;
-    }
-}
-
-export async function fetchVideo(someId) {
-    try {
-        const response = await request.get(`${URL}api/meetings/${someId}`);
+        const response = await request.get(`${URL}api/meetings/?search=${search}`)
+            .set('Authorization', token);
 
         return response.body;
     } catch (err) {
@@ -50,9 +43,21 @@ export async function fetchVideo(someId) {
     }
 }
 
-export async function deleteVideo(someId) {
+export async function fetchVideo(someId, token) {
     try {
-        await request.delete(`${URL}api/meetings/${someId}`);
+        const response = await request.get(`${URL}api/meetings/${someId}`)
+            .set('Authorization', token);
+
+        return response.body;
+    } catch (err) {
+        throw err;
+    }
+}
+
+export async function deleteVideo(someId, token) {
+    try {
+        await request.delete(`${URL}api/meetings/${someId}`)
+            .set('Authorization', token);
 
         return;
     } catch (err) {
@@ -80,11 +85,12 @@ export async function publishVideo(newVideo) {
         throw err;
     }
 }
-export async function favoriteVideo(newVideo) {
+export async function favoriteVideo(newVideo, token) {
     try {
         await request
             .post(`${URL}api/favorites`)
-            .send(newVideo);
+            .send(newVideo)
+            .set('Authorization', token);
 
         return;
     } catch (err) {
