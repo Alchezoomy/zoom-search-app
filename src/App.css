@@ -152,6 +152,7 @@ input {
 
 .dash-menu {
   cursor: crosshair;
+  text-align: center;
   width: 12%;
   padding: 1%;
   margin-top: 1%;
@@ -163,18 +164,20 @@ input {
 .dash-menu:hover, .dash:hover, .logout:hover, .fav:hover, .arc:hover {
   cursor: crosshair;
   color: white;
-  background-color: #2D8CFF;
   transition-duration: 1s;
 }
 
 .content {
   float: left;
+  text-align: center;
   width: 14%;
   margin-left: 1%;
   background-color: #BABACC;
 }
 
 .dash, .logout, .fav, .arc {
+  text-decoration: none;
+  color: #232333;
   font-size: 1.5vw;
   padding-top: .3em;
   padding-bottom: .3em;
