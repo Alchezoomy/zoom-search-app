@@ -14,15 +14,18 @@ import {
 export default class Student extends Component {
 
     state = {
-        loading: true,
+        loading: false,
         allVideos: [],
         search: '',
     }
 
     componentDidMount = async () => {
+        await this.setState({ loading: true });
+
         const allVideos = await fetchPublishedVideos(this.props.token)
         this.setState({
-            allVideos: allVideos
+            allVideos: allVideos,
+            loading: false
         })
     }
     handleFavorite = async (e) => {
@@ -54,12 +57,17 @@ export default class Student extends Component {
                     </select>
                 </div>
                 <div className='video-box'>
-                    {this.state.allVideos.map(video =>
-                        <div key={video.video}>
-                            <VideoList 
-                            video={video} /> 
-                        </div>
-                    )
+                    {
+                        this.state.loading
+                            ? <img src={'/loading-spinner.gif'} alt={''} />
+                            :
+                            this.state.allVideos.map(video =>
+                                <div key={video.video}>
+                                    <VideoList
+                                        video={video} />
+                                </div>
+                            )
+
                     }
                 </div>
             </div>

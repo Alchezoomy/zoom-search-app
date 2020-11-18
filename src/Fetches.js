@@ -70,7 +70,7 @@ export async function fetchChat(someId, token) {
         const response = await request.get(`${URL}api/chats/${someId}`)
             .set('Authorization', token);
 
-            return response.body;
+        return response.body;
     } catch (err) {
         throw err;
     }
@@ -86,9 +86,10 @@ export async function deleteVideo(someId, token) {
         throw err;
     }
 }
-export async function deleteFavoriteVideo(someId) {
+export async function deleteFavoriteVideo(someId, token) {
     try {
-        await request.delete(`${URL}api/favorites/${someId}`);
+        await request.delete(`${URL}api/favorites/${someId}`)
+            .set('Authorization', token);;
 
         return;
     } catch (err) {
