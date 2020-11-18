@@ -35,8 +35,6 @@ export default class DashMenu extends Component {
                         <Link to={'/bookmarks'} className='bookmark'>
                         <p>Bookmarks</p>
                         </Link>
-                        <Link to={'/archives'} className='arc'>  
-                        <p>Archives</p> </Link>
                         <Link to={'/'} className='logout'><p onClick={this.logOut}>Log Out</p></Link>
                     </div>
                 ) : null}
