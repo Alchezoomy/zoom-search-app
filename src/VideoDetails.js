@@ -64,7 +64,10 @@ export default class VideoDetails extends Component {
                     <div className='video'>
                         <Player
                             video_url={this.state.video.video_play_url} />
-
+                <div className='chat'>{this.state.chats.map(chat =>
+                        <div>{chat.timestamp} {chat.speaker} {chat.text}</div>
+                        )}
+                    </div>
                     </div>
                 </div>
                 <div className='buttons'>
@@ -74,10 +77,6 @@ export default class VideoDetails extends Component {
 
                 <div className='transcript'>{this.state.transcript.map(trans =>
                         <div>{trans.text}</div>
-                    )}
-                    </div>
-                    <div className='chat'>{this.state.chats.map(chat =>
-                        <div>{chat.timestamp} {chat.speaker} {chat.text}</div>
                     )}
                     </div>
             </div>
