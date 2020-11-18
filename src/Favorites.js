@@ -11,6 +11,7 @@ export default class Favorites extends Component {
         search: '',
         delete: false
     }
+
     handleDelete = async (e) => {
         await deleteFavoriteVideo(e.target.value, this.props.token);
         const favorites = await fetchFavorites(this.props.token)
@@ -25,7 +26,10 @@ export default class Favorites extends Component {
         this.setState({
             favorites: favorites,
         })
+        console.log(this.state.favorites)
+
     }
+
     render() {
         return (
 
@@ -35,9 +39,9 @@ export default class Favorites extends Component {
                     />
                 </div>
                 {this.state.favorites.map(video =>
-                    <div>  <Link to={`/meeting/${video.topic}`}>
+                    <div key={video.uuid}>  <Link to={`/meeting/${video.uuid}`}>
 
-                        <div> {video.uuid} </div>
+                        <div> {video.topic} </div>
                     </Link>
                         <button onClick={this.handleDelete} value={video.uuid}>Remove favorite </button>
                     </div>

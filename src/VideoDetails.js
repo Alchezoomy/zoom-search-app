@@ -50,6 +50,8 @@ export default class VideoDetails extends Component {
             owner_id: this.state.video.owner_id
 
         }
+        console.log(newFavorite)
+
         await favoriteVideo(newFavorite, this.props.token);
 
     }
@@ -84,14 +86,15 @@ export default class VideoDetails extends Component {
                                 </div>
                             </div>
 
-                            <div className='buttons'>
-                                <button onClick={this.handleFavorite} className='favorite-button'>Favorite</button>
-                                <button className="bookmarks">Bookmark Timestamp</button>
-                            </div>
+                    <div className='buttons'>
+                        <button onClick={this.handleFavorite} className='favorite-button'>Favorite</button>
+                        <button className="bookmarks">Bookmark Timestamp</button>
+                    </div>
 
-                            <div className='transcript'>{this.state.transcript.map(trans =>
-                                    <div>({trans.time_start}) {trans.text}</div>
-                                    )}
+                    <div className='transcript'>{this.state.transcript.map(trans =>
+                                <div key={trans.time_start}>({trans.time_start}) {trans.text}</div>
+                            )}
+
                             </div>
                         </div>
                     </div>
