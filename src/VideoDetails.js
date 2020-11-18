@@ -36,7 +36,7 @@ export default class VideoDetails extends Component {
                     <DashMenu
                     />
                 </div>
-
+                <h3>{this.state.video.topic}</h3>
                 <div className='video-detail'>
                     <div className='video'></div>
 
@@ -44,7 +44,6 @@ export default class VideoDetails extends Component {
 
                         <Player
                             video_url={this.state.video.video_play_url} />
-
 
                     </div>
 

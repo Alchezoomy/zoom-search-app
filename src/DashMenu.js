@@ -18,12 +18,9 @@ export default class DashMenu extends Component {
     logOut = () => {
         localStorage.setItem('TOKEN', '');
         localStorage.setItem('USERNAME', '');
-        // this.props.history.push('/');
         this.setState({
             username: '',
             token: '',
-
-
         })
 
     }
@@ -33,11 +30,10 @@ export default class DashMenu extends Component {
                 <div onClick={(e) => this.togglePanel(e)} className='dash-menu'><span className='menu-icon'>+</span></div>
                 {this.state.open ? (
                     <div className='content'>
-                        <p className='dash'>Dashboard</p>
-                        <Link to={'/student'}> <p className='fav'>All Videos</p> </Link>
-                        <Link to={'/favorites'}> <p className='fav'>Favorites</p> </Link>
-                        <Link to={'/archives'}>  <p className='arc'>Archives</p> </Link>
-                        <Link to={'/'}><p onClick={this.logOut} className='logout'>Log Out</p></Link>
+                        <Link to={'/student'} className='dash'> <p>Dashboard</p> </Link>
+                        <Link to={'/favorites'} className='fav'> <p>Favorites</p> </Link>
+                        <Link to={'/archives'} className='arc'>  <p>Archives</p> </Link>
+                        <Link to={'/'} className='logout'><p onClick={this.logOut}>Log Out</p></Link>
                     </div>
                 ) : null}
             </div>
