@@ -166,7 +166,7 @@ input {
   background-color: #BABACC;
 }
 
-.dash-menu:hover, .dash:hover, .logout:hover, .fav:hover, .arc:hover {
+.dash-menu:hover, .dash:hover, .logout:hover, .fav:hover, .bookmark:hover, .arc:hover {
   cursor: crosshair;
   color: white;
   transition-duration: 1s;
@@ -180,7 +180,7 @@ input {
   background-color: #BABACC;
 }
 
-.dash, .logout, .fav, .arc {
+.dash, .logout, .fav, .bookmark, .arc {
   text-decoration: none;
   color: #232333;
   font-size: 1.5vw;
@@ -241,6 +241,18 @@ input {
   overflow-y: scroll;
 }
 
+.chat {
+  position: absolute;
+  width: 17em;
+  height: 21em;
+  margin-top: -34.8em;
+  margin-left: 54em;
+  padding: 1%;
+  border: solid 1px #2D8CFF;
+  border-radius: 5px;
+  overflow-y: scroll;
+}
+
 .video-item {
   font-family: LatoRegular;
   border: solid 2px #747487;
@@ -290,26 +302,35 @@ input {
 .buttons {
   margin-top: 1.5%;
   margin-left: 50%;
-  font-family: Wingdings;
 }
 
 
-.thumbs-up, .thumbs-down, .favorite-button {
+.favorite-button {
   margin-right: 2%;
-  width: 5em;
+  width: 6em;
   background-color: white;
   border: solid 1px #2D8CFF;
   border-radius: 5px;
 }
 
-.thumbs-up:hover, .thumbs-down:hover, .favorite-button:hover {
+.bookmarks {
+  position: absolute;
+  margin-top: 5%;
+  margin-left: 13.5em;
+  width: 15em;
+  background-color: white;
+  border: solid 1px #2D8CFF;
+  border-radius: 5px;
+}
+
+.bookmarks:hover, .favorite-button:hover {
   background-color: #2D8CFF;
   color: white;
   transition-duration: 1s;
 }
 
 .transcript {
-  width: 55%;
+  width: 39.2em;
   height: 7.5em;
   margin-top: 2%;
   margin-left: 17%;

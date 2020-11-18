@@ -5,8 +5,8 @@ import {
 
     fetchVideo,
     favoriteVideo,
-    fetchTranscript
-
+    fetchTranscript, 
+    fetchChat
 
 } from './Fetches.js';
 
@@ -16,15 +16,21 @@ export default class VideoDetails extends Component {
         loading: true,
         video: [],
         search: '',
-        transcript: []
+        transcript: [],
+        chats: []
     }
 
     componentDidMount = async () => {
         const video = await fetchVideo(this.props.match.params.id, this.props.token);
+
         const transcript = await fetchTranscript(this.props.match.params.id, this.props.token);
+
+        const chats = await fetchChat(this.props.match.params.id, this.props.token);
+
         this.setState({
             video: video,
             transcript: transcript,
+            chats: chats,
         })
     }
 
@@ -62,17 +68,18 @@ export default class VideoDetails extends Component {
                     </div>
                 </div>
                 <div className='buttons'>
-                    <button className="thumbs-up">Like</button>
-                    <button className="thumbs-down">Dislike</button>
                     <button onClick={this.handleFavorite} className='favorite-button'>Favorite</button>
+                    <button className="bookmarks">Bookmark Timestamp</button>
                 </div>
 
                 <div className='transcript'>{this.state.transcript.map(trans =>
                         <div>{trans.text}</div>
                     )}
                     </div>
-
-                    <div className='chat'></div>
+                    <div className='chat'>{this.state.chats.map(chat =>
+                        <div>{chat.timestamp} {chat.speaker} {chat.text}</div>
+                    )}
+                    </div>
             </div>
         )
     }

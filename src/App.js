@@ -13,6 +13,7 @@ import Header from './Header.js'
 import LandingPage from './LandingPage.js'
 import Student from './Student.js'
 import Archives from './Archives.js'
+import Bookmarks from './Bookmarks.js'
 import Favorites from './Favorites.js'
 import VideoDetails from './VideoDetails.js'
 import SignUp from './SignUp.js'
@@ -108,6 +109,18 @@ export default class App extends Component {
                 />
               }
             />
+
+            <PrivateRoute
+            token={this.state.token}
+
+            exact path='/bookmarks'
+            render={(routerProps) =>
+              <Bookmarks
+                {...routerProps}
+                token={this.state.token}
+              />
+            }
+          />
 
             <PrivateRoute
               token={this.state.token}
