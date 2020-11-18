@@ -11,14 +11,14 @@ export default class Player extends Component {
         this.player = player
     }
 
-    handleCurrentTime = () => {
-        setInterval(() => { console.log(this.player.getCurrentTime()); }, 1000);
-    }
+    // handleCurrentTime = () => {
+    //     setInterval(() => { console.log(this.player.getCurrentTime()); }, 1000);
+    // }
 
     componentDidMount = async () => {
         // video start time
-        this.player.seekTo(300);
-        this.handleCurrentTime();
+        this.player.seekTo(0);
+        // this.handleCurrentTime();
     }
 
     render() {
@@ -26,15 +26,15 @@ export default class Player extends Component {
             <div>
                 <ReactPlayer
                     ref={this.ref}
-                    url={"../assets/GMT20201109-180413_september-_gallery_1920x1080.mp4"}
+                    url={this.props.video_url}
                     controls
-                    config={{
-                        file: {
-                            tracks: [
-                                { kind: 'subtitles', src: '../assets/GMT20201109-180413_september-.transcript.vtt', default: true }
-                            ]
-                        }
-                    }}
+                // config={{
+                //     file: {
+                //         tracks: [
+                //             { kind: 'subtitles', src: '../assets/GMT20201109-180413_september-.transcript.vtt', default: true }
+                //         ]
+                //     }
+                // }}
                 />
             </div>
 
