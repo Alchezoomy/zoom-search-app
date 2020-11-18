@@ -50,6 +50,8 @@ export default class VideoDetails extends Component {
             owner_id: this.state.video.owner_id
 
         }
+        console.log(newFavorite)
+
         await favoriteVideo(newFavorite, this.props.token);
 
     }
@@ -68,7 +70,7 @@ export default class VideoDetails extends Component {
                         <Player
                             video_url={this.state.video.video_play_url} />
                         <div className='chat'>{this.state.chats.map(chat =>
-                            <div>{chat.timestamp} {chat.speaker} {chat.text}</div>
+                            <div key={chat.timestamp}>({chat.timestamp}) {chat.speaker} {chat.text}</div>
                         )}
                         </div>
 
@@ -83,7 +85,7 @@ export default class VideoDetails extends Component {
                         this.state.loading
                             ? <img src={'/loading-spinner.gif'} alt={''} />
                             : <div className='transcript'>{this.state.transcript.map(trans =>
-                                <div>({trans.time_start}) {trans.text}</div>
+                                <div key={trans.time_start}>({trans.time_start}) {trans.text}</div>
                             )}
                             </div>
 

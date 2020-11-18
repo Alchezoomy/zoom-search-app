@@ -62,7 +62,7 @@ export default class Student extends Component {
                             ? <img src={'/loading-spinner.gif'} alt={''} />
                             :
                             this.state.allVideos.map(video =>
-                                <div key={video.video}>
+                                <div key={`${video.uuid}${Math.random()}`} >
                                     <VideoList
                                         video={video} />
                                 </div>
