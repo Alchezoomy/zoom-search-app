@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import DashMenu from './DashMenu.js'
-
+import Player from './Player.js'
 import {
 
     fetchVideo,
@@ -42,8 +42,9 @@ export default class VideoDetails extends Component {
 
                     <div>
 
-                        <div> {this.state.video.topic} </div>
-                        <div>{this.state.video.video_play_url}</div>
+                        <Player
+                            video_url={this.state.video.video_play_url} />
+
 
                     </div>
 
