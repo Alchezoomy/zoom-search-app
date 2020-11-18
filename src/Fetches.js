@@ -53,6 +53,16 @@ export async function fetchVideo(someId, token) {
         throw err;
     }
 }
+export async function fetchTranscript(someId, token) {
+    try {
+        const response = await request.get(`${URL}api/transcripts/${someId}`)
+            .set('Authorization', token);
+
+        return response.body;
+    } catch (err) {
+        throw err;
+    }
+}
 
 export async function deleteVideo(someId, token) {
     try {
