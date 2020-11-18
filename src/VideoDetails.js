@@ -55,12 +55,23 @@ export default class VideoDetails extends Component {
     }
     render() {
         return (
-            <div>
-                <div className='video-details'>
 
-                    <div className='left-nav'>
-                        <DashMenu
-                        />
+            <div className='video-details'>
+
+                <div className='left-nav'>
+                    <DashMenu
+                    />
+                </div>
+                <h3 className='video-header'>{this.state.video.topic}</h3>
+                <div className='video-detail'>
+                    <div className='video'>
+                        <Player
+                            video_url={this.state.video.video_play_url} />
+                <div className='chat'>{this.state.chats.map(chat =>
+                        <div>{chat.timestamp} {chat.speaker} {chat.text}</div>
+                        )}
+                    </div>
+
                     </div>
                     <h3 className='video-header'>{this.state.video.topic}</h3>
                     <div className='video-detail'>
@@ -70,6 +81,7 @@ export default class VideoDetails extends Component {
 
                         </div>
                     </div>
+
                     <div className='buttons'>
                         <button onClick={this.handleFavorite} className='favorite-button'>Favorite</button>
                         <button className="bookmarks">Bookmark Timestamp</button>
@@ -88,6 +100,7 @@ export default class VideoDetails extends Component {
                     <div>{chat.timestamp} {chat.speaker} {chat.text}</div>
                 )}
                 </div>
+\
             </div>
         )
     }
