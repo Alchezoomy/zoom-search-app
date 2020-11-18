@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { fetchFavorites } from './Fetches'
 import DashMenu from './DashMenu.js'
+import { Link } from 'react-router-dom';
+
 
 export default class Favorites extends Component {
     state = {
@@ -23,10 +25,11 @@ export default class Favorites extends Component {
                     />
                 </div>
                 {this.state.favorites.map(video =>
-                    <div>
+                    <div>  <Link to={`/meeting/${video.uuid}`}>
 
-                        <div> {video.topic} </div>
-
+                        <div> {video.uuid} </div>
+                    </Link>
+                        {/* <div value={video.uuid} onClick={this.handleFavorite}>Favorite</div> */}
                     </div>
 
 

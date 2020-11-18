@@ -68,11 +68,11 @@ export default class VideoDetails extends Component {
                 </div>
 
                 <div className='transcript'>{this.state.transcript.map(trans =>
-                        <div>{trans.text}</div>
-                    )}
-                    </div>
+                    <div>({trans.time_start}) {trans.text}</div>
+                )}
+                </div>
 
-                    <div className='chat'></div>
+                <div className='chat'></div>
             </div>
         )
     }
