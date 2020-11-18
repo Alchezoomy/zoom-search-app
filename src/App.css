@@ -75,7 +75,7 @@ html, body {
   border-radius: 10px;
 }
 
-.student-button:hover, .login-button:hover, .signup-button:hover, .search:hover, .sort:hover {
+.student-button:hover, .login-button:hover, .signup-button:hover, .search:hover, .sort:hover, .detail-search-button:hover, .bookmarks:hover, .favorite-button:hover {
   background-color: #2D8CFF;
   color: white;
   transition-duration: 1s;
@@ -276,8 +276,25 @@ input {
   position: absolute;
   font-family: LatoBold;
   margin-top: -3%;
-  margin-left: 20%;
+  margin-left: 17%;
   font-size: 110%;
+}
+
+.detail-search {
+  position: relative;
+  margin-left: 900px;
+}
+
+.detail-searchbar {
+  width: 200px;
+}
+
+.detail-search-button {
+  width: 100px;
+  margin-left: 1%;
+  background-color: white;
+  border: solid 1px #2D8CFF;
+  border-radius: 5px;
 }
 
 .video {
@@ -288,7 +305,7 @@ input {
 }
 
 .chat {
-  float: fixed;
+  display: fixed;
   width: 250px;
   height: 337px;
   margin-top: -360px;
@@ -313,17 +330,11 @@ input {
 }
 
 .bookmarks {
-  position: fixed;
+  position: absolute;
   width: 150px;
   background-color: white;
   border: solid 1px #2D8CFF;
   border-radius: 5px;
-}
-
-.bookmarks:hover, .favorite-button:hover {
-  background-color: #2D8CFF;
-  color: white;
-  transition-duration: 1s;
 }
 
 .transcript {
@@ -332,6 +343,7 @@ input {
   height: 150px;
   margin-top: 2vh;
   margin-left: 17%;
+  margin-bottom: 100px;
   padding: .5%;
   overflow-y: scroll;
   font-family: LatoRegular;
