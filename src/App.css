@@ -219,6 +219,10 @@ input {
   border-radius: 5px;
 }
 
+.highlight-me {
+  background-color: yellow;
+}
+
 .sort {
   margin-top: 2%;
   font-size: 1.4vw;
