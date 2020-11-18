@@ -5,7 +5,7 @@ import {
 
     fetchVideo,
     favoriteVideo,
-    searchPublishedVideos,
+    // searchPublishedVideos,
 
 
 } from './Fetches.js';
@@ -36,22 +36,19 @@ export default class VideoDetails extends Component {
                     <DashMenu
                     />
                 </div>
-                <h3>{this.state.video.topic}</h3>
+                <h3 className='video-header'>{this.state.video.topic}</h3>
                 <div className='video-detail'>
-                    <div className='video'></div>
-
-                    <div>
-
+                    <div className='video'>
                         <Player
-                            video_url={this.state.video.video_play_url} />
-
+                            video_url={this.state.video.video_play_url} 
+                            />
                     </div>
 
                     <div className='chat'></div>
                 </div>
                 <div className='buttons'>
-                    <button className="thumbs-up">Thumbs Up</button>
-                    <button className="thumbs-down">Thumbs Down</button>
+                    <button className="thumbs-up">Like</button>
+                    <button className="thumbs-down">Dislike</button>
                     <button onClick={this.handleFavorite} className='favorite-button'>Favorite</button>
                 </div>
             </div>

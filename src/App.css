@@ -13,6 +13,11 @@
   src: url('./fonts/Lato-Bold.ttf')
 }
 
+@font-face {
+  font-family: Wingdings;
+  src: url('./fonts/Wingdings\ 2.ttf')
+}
+
 html, body {
   min-height: 100%;
 }
@@ -267,14 +272,19 @@ input {
   background-color: #E4E4ED;
 }
 
+.video-header {
+  position: absolute;
+  font-family: LatoBold;
+  margin-top: -3%;
+  margin-left: 20%;
+  font-size: 110%;
+}
+
 .video {
   display: block;
-  margin-left: auto;
+  margin-left: 17%;
   margin-right: auto;
-  margin-top: 5%;
-  width: 50%;
-  height: 25em;
-  background-color: #232333;
+  margin-top: 2%;
 }
 
 .chat {
@@ -287,7 +297,24 @@ input {
 }
 
 .buttons {
+  margin-top: 1.5%;
   margin-left: 50%;
+  font-family: Wingdings;
+}
+
+
+.thumbs-up, .thumbs-down, .favorite-button {
+  margin-right: 2%;
+  width: 5em;
+  background-color: white;
+  border: solid 1px #2D8CFF;
+  border-radius: 5px;
+}
+
+.thumbs-up:hover, .thumbs-down:hover, .favorite-button:hover {
+  background-color: #2D8CFF;
+  color: white;
+  transition-duration: 1s;
 }
 
 .footer {
@@ -299,7 +326,6 @@ input {
   padding: .7em;
   background-color: #747487;
   text-align: right;
-  font-family: LatoLight;
   font-size: 1em;
 }
 
