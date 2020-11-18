@@ -25,7 +25,7 @@ export default class Favorites extends Component {
                 {this.state.favorites.map(video =>
                     <div>
 
-                        <div> {video.uuid} </div>
+                        <div> {video.topic} </div>
 
                     </div>
 
