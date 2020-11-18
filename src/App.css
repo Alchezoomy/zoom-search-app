@@ -184,8 +184,8 @@ input {
   text-decoration: none;
   color: #232333;
   font-size: 1.5vw;
-  padding-top: .3em;
-  padding-bottom: .3em;
+  padding-top: .3%;
+  padding-bottom: .3%;
 }
 
 .dashboard {
@@ -241,18 +241,6 @@ input {
   overflow-y: scroll;
 }
 
-.chat {
-  position: absolute;
-  width: 17em;
-  height: 21em;
-  margin-top: -34.8em;
-  margin-left: 54em;
-  padding: 1%;
-  border: solid 1px #2D8CFF;
-  border-radius: 5px;
-  overflow-y: scroll;
-}
-
 .video-item {
   font-family: LatoRegular;
   border: solid 2px #747487;
@@ -299,25 +287,34 @@ input {
   margin-top: 2%;
 }
 
-.buttons {
-  margin-top: 1.5%;
-  margin-left: 50%;
+.chat {
+  float: fixed;
+  width: 250px;
+  height: 337px;
+  margin-top: -360px;
+  margin-left: 680px;
+  padding: 1%;
+  border: solid 1px #2D8CFF;
+  border-radius: 5px;
+  overflow-y: scroll;
 }
 
+.buttons {
+  margin-top: 2vw;
+  margin-left: 17%;
+}
 
 .favorite-button {
-  margin-right: 2%;
-  width: 6em;
+  width: 100px;
+  margin-right: 390px;
   background-color: white;
   border: solid 1px #2D8CFF;
   border-radius: 5px;
 }
 
 .bookmarks {
-  position: absolute;
-  margin-top: 5%;
-  margin-left: 13.5em;
-  width: 15em;
+  position: fixed;
+  width: 150px;
   background-color: white;
   border: solid 1px #2D8CFF;
   border-radius: 5px;
@@ -330,9 +327,10 @@ input {
 }
 
 .transcript {
-  width: 39.2em;
-  height: 7.5em;
-  margin-top: 2%;
+  position: relative;
+  width: 630px;
+  height: 150px;
+  margin-top: 2vh;
   margin-left: 17%;
   padding: .5%;
   overflow-y: scroll;
