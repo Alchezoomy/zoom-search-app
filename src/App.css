@@ -287,15 +287,6 @@ input {
   margin-top: 2%;
 }
 
-.chat {
-  float: right;
-  margin-right: 3%;
-  margin-top: -33.4%;
-  width: 20%;
-  height: 25em;
-  border: solid 1px #232333;
-}
-
 .buttons {
   margin-top: 1.5%;
   margin-left: 50%;
@@ -315,6 +306,18 @@ input {
   background-color: #2D8CFF;
   color: white;
   transition-duration: 1s;
+}
+
+.transcript {
+  width: 55%;
+  height: 7.5em;
+  margin-top: 2%;
+  margin-left: 17%;
+  padding: .5%;
+  overflow-y: scroll;
+  font-family: LatoRegular;
+  border: solid 1px #2D8CFF;
+  border-radius: 5px;
 }
 
 .footer {
