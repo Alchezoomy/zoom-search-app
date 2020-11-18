@@ -59,19 +59,20 @@ export default class VideoDetails extends Component {
                         <Player
                             video_url={this.state.video.video_play_url} />
 
-                        <div>{this.state.transcript.map(trans =>
-                            <div>{trans.text}</div>
-                        )}
-                        </div>
                     </div>
-
-                    <div className='chat'></div>
                 </div>
                 <div className='buttons'>
                     <button className="thumbs-up">Like</button>
                     <button className="thumbs-down">Dislike</button>
                     <button onClick={this.handleFavorite} className='favorite-button'>Favorite</button>
                 </div>
+
+                <div className='transcript'>{this.state.transcript.map(trans =>
+                        <div>{trans.text}</div>
+                    )}
+                    </div>
+
+                    <div className='chat'></div>
             </div>
         )
     }
