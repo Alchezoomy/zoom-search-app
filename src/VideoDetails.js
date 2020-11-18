@@ -112,4 +112,4 @@ export default class VideoDetails extends Component {
       </div>
     );
   }
-}))
+}
