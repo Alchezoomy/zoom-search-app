@@ -53,7 +53,7 @@ export default class VideoDetails extends Component {
                     <DashMenu
                     />
                 </div>
-
+                <h3>{this.state.video.topic}</h3>
                 <div className='video-detail'>
                     <div className='video'></div>
 
@@ -66,7 +66,6 @@ export default class VideoDetails extends Component {
                             <div>{trans.text}</div>
                         )}
                         </div>
-
                     </div>
 
                     <div className='chat'></div>
