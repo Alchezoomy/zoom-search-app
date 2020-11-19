@@ -1,8 +1,10 @@
+
+import DashMenu from './DashMenu.js'
+import ReactPlayer from 'react-player';
 import React, { Component } from "react";
 import "./App.css";
-import DashMenu from "./DashMenu.js";
-import Player from "./Player.js";
 import Fuse from "fuse.js";
+
 import {
   fetchVideo,
   favoriteVideo,
@@ -11,6 +13,7 @@ import {
 } from "./Fetches.js";
 
 export default class VideoDetails extends Component {
+
   state = {
     loading: false,
     video: [],
@@ -21,6 +24,12 @@ export default class VideoDetails extends Component {
     fuzzy: [],
   };
 
+
+    ref = player => {
+        this.player = player
+    }
+
+
   componentDidMount = async () => {
     await this.setState({ loading: true });
     const video = await fetchVideo(
@@ -28,6 +37,8 @@ export default class VideoDetails extends Component {
       this.props.token
     );
 
+    await this.player.seekTo(this.state.timeStamp);
+    
     const transcript = await fetchTranscript(
       this.props.match.params.id,
       this.props.token
@@ -75,12 +86,15 @@ export default class VideoDetails extends Component {
     await bookmarkVideo(newBookmark, this.props.token);
   };
 
-  handleTimeStamp = async (e) => {
-    await this.setState({
-      timeStamp: e.target.className,
-    });
-    console.log(this.state.timeStamp);
-  };
+    handleTimeStamp = async (e) => {
+        const newTime = Math.floor(e.target.className);
+        // console.log(newTime)
+        await this.player.seekTo(newTime);
+        this.setState({
+            timeStamp: newTime
+        })
+
+    }
 
   handleSearch = (e) => {
     e.preventDefault();
@@ -131,10 +145,13 @@ export default class VideoDetails extends Component {
             </div>
             <div className="video-detail">
               <div className="video">
-                <Player
-                  timeStamp={timeStamp}
-                  video_url={video.video_play_url}
-                />
+<div>
+                                        <ReactPlayer
+                                            ref={this.ref}
+                                            url={this.state.video.video_play_url}
+                                            controls
+                                        />
+                                    </div>
                 <div className="chat">
                   {chats.map((chat) => (
                     <div>
@@ -192,6 +209,7 @@ export default class VideoDetails extends Component {
                   );
                 })}
               </div>
+
             </div>
           </div>
         )}
