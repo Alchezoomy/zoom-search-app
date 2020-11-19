@@ -20,6 +20,7 @@ export default class VideoDetails extends Component {
     chats: [],
     timeStamp: 1,
     fuzzy: [],
+    favorited: "",
   };
 
   componentDidMount = async () => {
@@ -41,7 +42,18 @@ export default class VideoDetails extends Component {
       transcript: transcript,
       chats: chats,
       loading: false,
+      favorited: this.favorited,
     });
+  };
+
+  handleFavoriteButton = async (e) => {
+    if (!this.state.favorited === true) {
+      e.target.style.backgroundColor = "white";
+      e.target.style.color = "#2D8CFF";
+    } else if (this.state.favorited === true) {
+      e.target.style.backgroundColor = "#747487";
+      e.target.style.color = "white";
+    }
   };
 
   handleFavorite = async (e) => {
@@ -53,16 +65,20 @@ export default class VideoDetails extends Component {
       text: "",
       owner_id: this.state.video.owner_id,
     };
-    console.log(newFavorite);
 
     await favoriteVideo(newFavorite, this.props.token);
+
+    this.setState({
+      favorited: true,
+    });
+
+    await this.handleFavoriteButton(e);
   };
 
   handleBookmark = async (identifier, text, time_start, speaker, id) => {
     const newBookmark = {
       id: id,
       uuid: this.state.video.uuid,
-
       topic: this.state.video.topic,
       host_id: this.state.video.host_id,
       start_time: this.state.video.start_time,
@@ -113,16 +129,6 @@ export default class VideoDetails extends Component {
 
     const fuzzySet = new Set(fuzzy.map((match) => match.item.text));
 
-    const seedTranscript = (script) => (
-      <div
-        onClick={this.handleTimeStamp}
-        className={script.time_start}
-        key={script.time_start}
-      >
-        ({script.time_start}) {script.text}{" "}
-      </div>
-    );
-
     return (
       <div className="video-details">
         <div className="left-nav">
@@ -144,18 +150,22 @@ export default class VideoDetails extends Component {
                 <button className="detail-search-button">Search</button>
               </form>
             </div>
+
             <div className="video-detail">
               <div className="video">
                 <Player
                   timeStamp={timeStamp}
                   video_url={video.video_play_url}
                 />
-                <div className="chat">
-                  {chats.map((chat) => (
-                    <div>
-                      {chat.timestamp} {chat.speaker} {chat.text}
-                    </div>
-                  ))}
+                <div className="chat-shell">
+                  <h4 className="chat-title">Chat</h4>
+                  <div className="chat">
+                    {chats.map((chat) => (
+                      <div>
+                        {chat.timestamp} {chat.speaker} {chat.text}
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
 
@@ -166,16 +176,20 @@ export default class VideoDetails extends Component {
                 >
                   Favorite
                 </button>
-                <button className="bookmarks">Bookmark Timestamp</button>
               </div>
-
-              <div className="transcript">
-                {!isSearching &&
-                  transcript.map((script) => seedTranscript(script))}
-                {isSearching &&
-                  transcript.map((script) =>
-                    transcriptRender(fuzzySet, script, this.handleTimeStamp)
-                  )}
+              <div className="transcript-shell">
+                <h5 className="bookmark-timestamp">Bookmark Timestamp</h5>
+                <h4 className="transcript-header">Transcript</h4>
+                <div className="transcript">
+                  {!isSearching &&
+                    transcript.map((script) =>
+                      seedTranscript(script, this.handleTimeStamp)
+                    )}
+                  {isSearching &&
+                    transcript.map((script) =>
+                      transcriptRender(fuzzySet, script, this.handleTimeStamp)
+                    )}
+                </div>
               </div>
             </div>
           </div>
@@ -184,6 +198,16 @@ export default class VideoDetails extends Component {
     );
   }
 }
+
+const seedTranscript = (script, handleTimeStamp) => (
+  <div
+    onClick={handleTimeStamp}
+    className={script.time_start}
+    key={script.time_start}
+  >
+    ({script.time_start}) {script.text}{" "}
+  </div>
+);
 
 const transcriptRender = (fuzzySet, script, handleTimeStamp) => {
   if (fuzzySet.has(script.text)) {
@@ -195,11 +219,25 @@ const transcriptRender = (fuzzySet, script, handleTimeStamp) => {
 
 const searchHighlight = (script, handleTimeStamp) => (
   <div
-    onClick={handleTimeStamp}
-    className={`${script.time_start} highlight-me`}
+    onClick={this.handleTimeStamp}
+    className={script.time_start}
     key={script.time_start}
   >
-    ({script.time_start}) {script.text}
+    <button
+      className="bookmark-button"
+      onClick={() =>
+        this.handleBookmark(
+          script.identifier,
+          script.text,
+          script.time_start,
+          script.speaker,
+          script.id
+        )
+      }
+    >
+      {script.time_start.toFixed(1)}
+    </button>
+    {script.text}
   </div>
 );
 

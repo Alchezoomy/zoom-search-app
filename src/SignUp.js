@@ -26,8 +26,8 @@ export default class SignUp extends Component {
     render() {
         return (
             <div className='sign-up-page'>
-                <h2 className='student-signup'>Student Sign Up</h2>
                 <div className='box'>
+                <h2 className='student-signup'>Student Sign Up</h2>
                     <form onSubmit={this.handleSubmit}>
                         <p className='email'>E-mail:</p>
                         <input onChange={(e) => this.setState({ email: e.target.value })}
