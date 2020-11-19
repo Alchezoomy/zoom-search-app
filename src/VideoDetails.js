@@ -86,8 +86,11 @@ export default class VideoDetails extends Component {
     }
     handleTimeStamp = async (e) => {
         const newTime = Math.floor(e.target.className);
-        console.log(newTime)
+        // console.log(newTime)
         await this.player.seekTo(newTime);
+        this.setState({
+            timeStamp: newTime
+        })
 
     }
 
@@ -116,8 +119,6 @@ export default class VideoDetails extends Component {
                                 <div className='video'>
                                     <div>
                                         <ReactPlayer
-                                            // ref
-                                            // timeStamp={this.state.timeStamp}
                                             ref={this.ref}
                                             url={this.state.video.video_play_url}
                                             controls
