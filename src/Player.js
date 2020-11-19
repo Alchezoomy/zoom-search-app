@@ -4,8 +4,7 @@ import ReactPlayer from 'react-player';
 export default class Player extends Component {
 
     state = {
-        currentTime: 1,
-        timeStamp: this.props.timeStamp
+        currentTime: 0,
     }
 
     ref = player => {
@@ -18,16 +17,9 @@ export default class Player extends Component {
 
     componentDidMount = async () => {
         // video start time
-        await this.player.seekTo(this.state.timeStamp);
+        this.player.seekTo(0);
         // this.handleCurrentTime();
-        console.log(this.state.timeStamp)
     }
-    // component = async () => {
-    //     // video start time
-    //     await this.player.seekTo(Math.floor(this.state.timeStamp));
-    //     // this.handleCurrentTime();
-
-    // }
 
     render() {
         return (
@@ -35,7 +27,6 @@ export default class Player extends Component {
                 <ReactPlayer
                     ref={this.ref}
                     url={this.props.video_url}
-
                     controls
                 // config={{
                 //     file: {

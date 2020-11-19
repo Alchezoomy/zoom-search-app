@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
-import { fetchFavorites, deleteFavoriteVideo } from './Fetches'
+import { fetchFavorites, deleteFavoriteVideo } from './Fetches.js'
 import DashMenu from './DashMenu.js'
-import { Link } from 'react-router-dom';
+import FavoriteList from './FavoriteList.js'
+
 
 
 export default class Favorites extends Component {
     state = {
-        loading: true,
+        loading: false,
         favorites: [],
         search: '',
         delete: false
@@ -26,7 +27,7 @@ export default class Favorites extends Component {
         this.setState({
             favorites: favorites,
         })
-        console.log(this.state.favorites)
+        console.log(this.props.token)
 
     }
 
@@ -38,18 +39,27 @@ export default class Favorites extends Component {
                     <DashMenu
                     />
                 </div>
-                {this.state.favorites.map(video =>
-                    <div key={video.uuid}>  <Link to={`/meeting/${video.uuid}`}>
 
-                        <div> {video.topic} </div>
-                    </Link>
-                        <button onClick={this.handleDelete} value={video.uuid}>Remove favorite </button>
+            <h3 className='dashboard'>Favorites Dashboard</h3>
+
+                <div className='video-box'>
+                    {
+                        this.state.loading
+                            ? <img src={'/loading-spinner.gif'} alt={''} />
+                            :
+                            this.state.favorites.map(video =>
+                                <div key={`${video.uuid}${Math.random()}`} >
+                                    <FavoriteList
+                                    token={this.props.token}
+                                    video={video}
+                                    handleDelete={this.handleDelete} />
+                                </div>
+                                )
+
+                    }
                     </div>
 
-
-                )
-                }
-            </div>
+                </div>
         )
     }
 }
