@@ -18,9 +18,9 @@ export default class Player extends Component {
 
     componentDidMount = async () => {
         // video start time
-        await this.player.seekTo(this.state.timeStamp);
+        await this.player.seekTo(this.props.timeStamp);
         // this.handleCurrentTime();
-        console.log(this.state.timeStamp)
+        console.log(this.props.timeStamp)
     }
     // component = async () => {
     //     // video start time

@@ -21,6 +21,16 @@ export async function fetchFavorites(token) {
         throw err;
     }
 }
+export async function fetchBookmarks(token) {
+    try {
+        const response = await request.get(`${URL}api/bookmarks`)
+            .set('Authorization', token);
+
+        return response.body;
+    } catch (err) {
+        throw err;
+    }
+}
 
 export async function fetchPublishedVideos(token) {
     try {
@@ -96,6 +106,16 @@ export async function deleteFavoriteVideo(someId, token) {
         throw err;
     }
 }
+export async function deleteBookmark(someId, token) {
+    try {
+        await request.delete(`${URL}api/bookmarks/${someId}`)
+            .set('Authorization', token);;
+
+        return;
+    } catch (err) {
+        throw err;
+    }
+}
 
 export async function publishVideo(newVideo) {
     try {
@@ -112,6 +132,18 @@ export async function favoriteVideo(newVideo, token) {
     try {
         await request
             .post(`${URL}api/favorites`)
+            .send(newVideo)
+            .set('Authorization', token);
+
+        return;
+    } catch (err) {
+        throw err;
+    }
+}
+export async function bookmarkVideo(newVideo, token) {
+    try {
+        await request
+            .post(`${URL}api/bookmarks`)
             .send(newVideo)
             .set('Authorization', token);
 
