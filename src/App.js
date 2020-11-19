@@ -99,16 +99,16 @@ export default class App extends Component {
             />
 
             <PrivateRoute
-            token={this.state.token}
+              token={this.state.token}
 
-            exact path='/bookmarks'
-            render={(routerProps) =>
-              <Bookmarks
-                {...routerProps}
-                token={this.state.token}
-              />
-            }
-          />
+              exact path='/bookmarks'
+              render={(routerProps) =>
+                <Bookmarks
+                  {...routerProps}
+                  token={this.state.token}
+                />
+              }
+            />
 
             <PrivateRoute
               token={this.state.token}
