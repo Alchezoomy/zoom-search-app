@@ -43,9 +43,9 @@ export default class Bookmarks extends Component {
 
                         <div> {video.topic} </div>
                         <div> {video.time_start} </div>
-                        <div> {video.id} </div>
 
-                    </Link>
+
+                    </Link><div> {video.text} </div>
                         <button onClick={this.handleDelete} value={video.id}>Remove Bookmark </button>
                     </div>
 
