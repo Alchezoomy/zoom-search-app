@@ -18,7 +18,8 @@ export default class VideoDetails extends Component {
     search: "",
     transcript: [],
     chats: [],
-    timeStamp: 1,
+    timeStamp:
+      Number(window.location.search.substr(1)) || 1,
     fuzzy: [],
     favorited: "",
   };
@@ -35,12 +36,12 @@ export default class VideoDetails extends Component {
       this.props.token
     );
 
-    // await this.player.seekTo(this.state.timeStamp);
 
     const transcript = await fetchTranscript(
       this.props.match.params.id,
       this.props.token
     );
+
 
     const chats = await fetchChat(this.props.match.params.id, this.props.token);
 
@@ -51,6 +52,9 @@ export default class VideoDetails extends Component {
       loading: false,
       favorited: this.favorited,
     });
+    console.log(`state: ${this.state.timeStamp}`)
+    this.player.seekTo(this.state.timeStamp);
+
   };
 
   handleFavoriteButton = async (e) => {
