@@ -8,7 +8,6 @@ import {
     favoriteVideo,
     searchPublishedVideos,
 
-
 } from './Fetches.js';
 
 export default class Student extends Component {
@@ -23,6 +22,7 @@ export default class Student extends Component {
         await this.setState({ loading: true });
 
         const allVideos = await fetchPublishedVideos(this.props.token)
+
         this.setState({
             allVideos: allVideos,
             loading: false
@@ -41,7 +41,6 @@ export default class Student extends Component {
             allVideos: search
         })
     }
-
 
     render() {
         return (
