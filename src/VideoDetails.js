@@ -9,6 +9,7 @@ import {
   fetchTranscript,
   fetchChat,
   bookmarkVideo,
+  fetchFavorites,
 } from "./Fetches.js";
 
 export default class VideoDetails extends Component {
@@ -31,11 +32,14 @@ export default class VideoDetails extends Component {
   componentDidMount = async () => {
     await this.setState({ loading: true });
 
+    const favorites = await fetchFavorites(
+      this.props.token
+    );
+
     const video = await fetchVideo(
       this.props.match.params.id,
       this.props.token
     );
-
 
     const transcript = await fetchTranscript(
       this.props.match.params.id,
@@ -45,12 +49,12 @@ export default class VideoDetails extends Component {
 
     const chats = await fetchChat(this.props.match.params.id, this.props.token);
 
-    this.setState({
+    await this.setState({
       video: video,
       transcript: transcript,
       chats: chats,
       loading: false,
-      favorited: this.favorited,
+      favorites: favorites
     });
 
     this.determineFavorite()
@@ -70,12 +74,18 @@ export default class VideoDetails extends Component {
   };
 
   determineFavorite = async (e) => {
-    const isFavorite = this.props.favorites.some(favorite => favorite.uuid === this.state.video.uuid)
+    let isFavorite = false;
+    for(let favorite of this.state.favorites){
+      if(favorite.uuid === this.state.video.uuid){
+        isFavorite = true;
+      }
+    }
+    console.log(isFavorite)
 
     this.setState({
       favorited: isFavorite
     })
-  }
+  };
 
   handleFavorite = async (e) => {
     const newFavorite = {
@@ -89,11 +99,12 @@ export default class VideoDetails extends Component {
 
     await favoriteVideo(newFavorite, this.props.token);
 
-    // this.setState({
-    //   favorited: true,
-    // });
+    this.setState({
+      favorited: true
+    })
 
-    // await this.handleFavoriteButton(e);
+    this.handleFavoriteButton(e);
+    
   };
 
   handleBookmark = async (identifier, text, time_start, speaker, id) => {

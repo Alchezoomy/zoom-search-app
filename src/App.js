@@ -74,7 +74,6 @@ export default class App extends Component {
                   {...routerProps}
                   token={this.state.token}
                   logOut={this.logOut}
-                  handleSetState={this.handleSetState}
                 />
               }
 
