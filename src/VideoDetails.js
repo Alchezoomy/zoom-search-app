@@ -101,12 +101,12 @@ export default class VideoDetails extends Component {
 
   handleTimeStamp = async (e) => {
     const newTime = Math.floor(e.target.className);
-        await this.player.seekTo(newTime);
-        this.setState({
-            timeStamp: newTime
-        })
+    await this.player.seekTo(newTime);
+    this.setState({
+      timeStamp: newTime
+    })
 
-      console.log(this.state.timeStamp)
+    console.log(this.state.timeStamp)
   };
 
   handleSearch = (e) => {
@@ -167,7 +167,7 @@ export default class VideoDetails extends Component {
                       ref={this.ref}
                       url={this.state.video.video_play_url}
                       controls
-                      />
+                    />
                   </div>
                   <div className="chat-shell">
                     <h4 className="chat-title">Chat</h4>
@@ -221,7 +221,7 @@ export default class VideoDetails extends Component {
 }
 
 const seedTranscript = (script, handleTimeStamp, handleBookmark) => (
-  <div onClick={handleTimeStamp} className={script.time_start} key={script.id}>
+  <div>
     <button
       className="bookmark-button"
       onClick={() =>
@@ -237,7 +237,8 @@ const seedTranscript = (script, handleTimeStamp, handleBookmark) => (
     >
       {script.time_start.toFixed(1)}
     </button>
-    {script.text}{" "}
+    <div onClick={handleTimeStamp} className={script.time_start} key={script.id}> {script.text}{" "}
+    </div>
   </div>
 );
 
@@ -270,9 +271,9 @@ const searchHighlight = (script, handleTimeStamp, handleBookmark) => (
     >
       {script.time_start.toFixed(1)}
     </button>
-  <div onClick={handleTimeStamp} className={script.time_start} key={script.id}>
-    {script.text}
-  </div>
+    <div onClick={handleTimeStamp} className={script.time_start} key={script.id}>
+      {script.text}
+    </div>
   </div>
 );
 
