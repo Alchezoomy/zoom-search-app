@@ -213,16 +213,12 @@ const transcriptRender = (fuzzySet, script, handleTimeStamp) => {
   }
 };
 
-const searchHighlight = (script, handleTimeStamp) => (
-  <div
-    onClick={this.handleTimeStamp}
-    className={script.time_start}
-    key={script.id}
-  >
+const searchHighlight = (script, handleTimeStamp, handleBookmark) => (
+  <div onClick={handleTimeStamp} className={script.time_start} key={script.id}>
     <button
       className="bookmark-button"
       onClick={() =>
-        this.handleBookmark(
+        handleBookmark(
           script.identifier,
           script.text,
           script.time_start,
