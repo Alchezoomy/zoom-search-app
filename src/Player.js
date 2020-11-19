@@ -3,6 +3,7 @@ import ReactPlayer from "react-player";
 
 export default class Player extends Component {
 
+
   state = {
     currentTime: 1,
     timeStamp: this.props.timeStamp,
