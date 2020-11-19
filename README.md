@@ -1,6 +1,6 @@
 # _AlcheZOOMy_
 
-#### **AlcheZOOMy** is an appliction that allows user to search and favorite videos, transcripts and chats from various published zoom meetings. Designed and built over a five-day sprint as a part of the Alchemy Code Lab's curriculum, 11-20-2020
+#### **AlcheZOOMy** is an appliction that utilizes the Zoom API to allows user to search and favorite videos, transcripts and chats from various published Alchemy zoom meetings. Designed and built over a five-day sprint as a part of the Alchemy Code Lab's curriculum, 11-20-2020
 
 #### **The AlcheZOOMies**:
 - Dee Watson
