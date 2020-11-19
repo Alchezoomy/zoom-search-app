@@ -23,9 +23,16 @@ html, body {
 }
 
 .header {
+  position: fixed;
+  width: 100%;
+  top: 0;
   padding: 1.5%;
   background-color: #2D8CFF;
   text-align: center;
+}
+
+.header-shell {
+  height: 150px;
 }
 
 .alchezoomy {
@@ -41,6 +48,7 @@ html, body {
 }
 
 .landing {
+
   font-family: LatoRegular;
   text-align: center;
   color: #232333;
@@ -140,6 +148,7 @@ input {
 }
 
 .sign-up-page {
+
   text-align: center;
 }
 
@@ -152,10 +161,10 @@ input {
 .student-dashboard {
   font-family: LatoRegular;
   color: #232333;
-  text-align: center;
 }
 
 .dash-menu {
+  position: fixed;
   cursor: crosshair;
   text-align: center;
   width: 12%;
@@ -173,7 +182,8 @@ input {
 }
 
 .content {
-  float: left;
+  position: fixed;
+  margin-top: 5%;
   text-align: center;
   width: 14%;
   margin-left: 1%;
@@ -189,16 +199,15 @@ input {
 }
 
 .dashboard {
-  position: absolute;
   font-family: LatoBold;
-  margin-top: -2%;
+  margin-top: 0;
   margin-left: 20%;
   font-size: 3.5vw;
 }
 
 .search-and-sort {
   position: absolute;
-  margin-top: -2%;
+  margin-top: -6%;
   text-align: right;
   width: 30%;
   right: 5%;
@@ -236,22 +245,42 @@ input {
 
 .video-box {
   display: absolute;
-  margin-top: 6%;
+  margin-top: 3%;
   margin-left: 20%;
   margin-right: auto;
   margin-bottom: 5%;
   width: 55%;
   height: 40vw;
+  text-align: center;
   border: solid 1px #2D8CFF;
   text-decoration: none;
   overflow-y: scroll;
 }
 
-.video-item {
+.video-item, .favorite-item {
   font-family: LatoRegular;
   border: solid 2px #747487;
   padding-bottom: 2%;
   color: #2D8CFF;
+}
+
+.meeting-link {
+  font-family: LatoRegular;
+  color: #2D8CFF;
+}
+
+.meeting-link:hover {
+  cursor: crosshair;
+}
+
+
+.favorite-item {
+  text-align: center;
+  padding-right: 1%;
+}
+
+a {
+  text-decoration: none;
 }
 
 .video-item:hover {
@@ -260,8 +289,13 @@ input {
   transition-duration: 1s;
 }
 
-.meeting-link {
-  text-decoration: none;
+.favorite-item:hover {
+  background-color: #BABACC;
+  transition-duration: 1s;
+}
+
+.favorite-topic {
+  width: 90%;
 }
 
 .topic {
@@ -281,14 +315,16 @@ input {
 .video-header {
   position: absolute;
   font-family: LatoBold;
-  margin-top: -3%;
+  margin-top: 0%;
   margin-left: 17%;
   font-size: 110%;
+  z-index: -1;
 }
 
 .detail-search {
   position: relative;
   margin-left: 900px;
+  z-index: -1;
 }
 
 .detail-searchbar {
@@ -310,12 +346,25 @@ input {
   margin-top: 2%;
 }
 
+.chat-shell {
+  width: 250px;
+  height: 350px;
+  margin-top: -400px;
+  margin-left: 680px;
+}
+
+.chat-title {
+  float: right;
+  text-align: center;
+  margin-bottom: 10px;
+  font-family: LatoBold;
+  font-size: 17pt;
+  width: 250px;
+}
+
 .chat {
   display: fixed;
-  width: 250px;
-  height: 337px;
-  margin-top: -360px;
-  margin-left: 680px;
+  height: 590px;
   padding: 1%;
   border: solid 1px #2D8CFF;
   border-radius: 5px;
@@ -323,38 +372,90 @@ input {
 }
 
 .buttons {
-  margin-top: 2vw;
+  margin-top: 70px;
   margin-left: 17%;
 }
 
 .favorite-button {
   width: 100px;
-  margin-right: 390px;
+  margin-left: 545px;
   background-color: white;
   border: solid 1px #2D8CFF;
   border-radius: 5px;
 }
 
-.bookmarks {
-  position: absolute;
-  width: 150px;
+.bookmark-timestamp {
+  float: left;
+  width: 75px;
+  margin-left: 1%;
+  margin-bottom: 0;
+  overflow-wrap: normal;
+}
+
+.transcript-header {
+  text-align: center;
+  font-family: LatoBold;
+  font-size: 17pt;
+  width: 555px;
+}
+
+.bookmark-button {
+  width: 75px;
+  margin-right: 1%;
   background-color: white;
+  color: #2D8CFF;
   border: solid 1px #2D8CFF;
   border-radius: 5px;
+}
+
+.bookmark-button:hover {
+  cursor: crosshair;
+  background-color: #2D8CFF;
+  color: white;
+}
+
+.transcript-shell {
+  position: absolute;
+  width: 630px;
+  height: 170px;
+  margin-top: -30px;
+  margin-left: 17%;
+  z-index: -1;
 }
 
 .transcript {
   position: relative;
   width: 630px;
-  height: 150px;
-  margin-top: 2vh;
-  margin-left: 17%;
+  height: 170px;
+  margin-top: -15px;
   margin-bottom: 100px;
   padding: .5%;
   overflow-y: scroll;
   font-family: LatoRegular;
   border: solid 1px #2D8CFF;
   border-radius: 5px;
+}
+
+.remove-favorite-button {
+  float: right;
+  width: 20px;
+  height: 20px;
+  margin-top: -60px;
+  margin-right: 1%;
+  padding: 3%;
+  height: 30px;
+}
+
+.remove-button {
+  border: none;
+  font-size: 15pt;
+  color: #747487;
+  background-color: #E4E4ED;
+  border-radius: 10px;
+}
+
+.remove-button:hover {
+  cursor: crosshair;
 }
 
 .footer {

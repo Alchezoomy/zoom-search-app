@@ -2,15 +2,6 @@ import request from "superagent";
 
 const URL = "https://alchezoomy.herokuapp.com/";
 
-// export async function fetchAllVideos() {
-//     try {
-//         const response = await request.get(`https://api.zoom.us/v2/users/{userId}/recordings`);
-
-//         return response.body;
-//     } catch (err) {
-//         throw err;
-//     }
-// }
 export async function fetchFavorites(token) {
   try {
     const response = await request

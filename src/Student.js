@@ -53,7 +53,7 @@ export default class Student extends Component {
                         <option value='none'>Sort Videos By...</option>
                         <option>Date</option>
                         <option>Host</option>
-                        <option >Favorites</option>
+                        <option>Favorites</option>
                     </select>
                 </div>
                 <div className='video-box'>
