@@ -34,7 +34,10 @@ export default class Student extends Component {
 
     handleSearch = async (e) => {
         e.preventDefault()
-        await searchPublishedVideos(this.state.search, this.props.token);
+        const search = await searchPublishedVideos(this.state.search, this.props.token);
+        this.setState({
+            allVideos: search
+        })
     }
 
     render() {
