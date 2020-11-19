@@ -26,7 +26,6 @@ export default class Bookmarks extends Component {
         this.setState({
             bookmarks: bookmarks,
         })
-        console.log(this.state.bookmarks)
 
     }
 
