@@ -3,7 +3,8 @@ import ReactPlayer from "react-player";
 
 export default class Player extends Component {
   state = {
-    currentTime: 0,
+    currentTime: 1,
+    timeStamp: this.props.timeStamp,
   };
 
   ref = (player) => {
@@ -16,9 +17,16 @@ export default class Player extends Component {
 
   componentDidMount = async () => {
     // video start time
-    // this.player.seekTo(0);
+    await this.player.seekTo(this.state.timeStamp);
     // this.handleCurrentTime();
+    console.log(this.state.timeStamp);
   };
+  // component = async () => {
+  //     // video start time
+  //     await this.player.seekTo(Math.floor(this.state.timeStamp));
+  //     // this.handleCurrentTime();
+
+  // }
 
   render() {
     return (

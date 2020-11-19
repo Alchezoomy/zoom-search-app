@@ -17,15 +17,15 @@ export default class VideoDetails extends Component {
     search: "",
     transcript: [],
     chats: [],
-    fuzzy: [],
+    timeStamp: 200,
   };
-
   componentDidMount = async () => {
     await this.setState({ loading: true });
     const video = await fetchVideo(
       this.props.match.params.id,
       this.props.token
     );
+
     const transcript = await fetchTranscript(
       this.props.match.params.id,
       this.props.token
@@ -42,65 +42,41 @@ export default class VideoDetails extends Component {
   };
 
   handleFavorite = async (e) => {
-    const { video } = this.state;
-    const { token } = this.props;
     const newFavorite = {
-      uuid: video.uuid,
-      host_id: video.host_id,
-      topic: video.topic,
-      start_time: video.start_time,
-      timestamp: video.timestamp,
-      speaker: "",
+      uuid: this.state.video.uuid,
+      topic: this.state.video.topic,
+      start_time: this.state.video.start_time,
+      timestamp: "this.state.video.timestamp",
       text: "",
-      owner_id: video.owner_id,
+      owner_id: this.state.video.owner_id,
     };
     console.log(newFavorite);
 
-    await favoriteVideo(newFavorite, token);
+    await favoriteVideo(newFavorite, this.props.token);
   };
-
-  handleSearch = (e) => {
-    e.preventDefault();
-
-    const { transcript, search } = this.state;
-
-    const options = {
-      includeScore: true,
-      shouldSort: true,
-      ignoreLocation: true,
-      threshold: 0.2,
-      keys: ["text"],
-    };
-
-    const fuse = new Fuse(transcript, options);
-    const fuzzysearch = fuse.search(search);
-    console.log("fuzzysearch: ", fuzzysearch);
-
-    this.setState({
-      fuzzy: fuzzysearch,
+  handleTimeStamp = async (e) => {
+    await this.setState({
+      timeStamp: e.target.className,
     });
-
-    console.log("search: ", search);
+    console.log(this.state.timeStamp);
   };
 
   render() {
-    const { transcript, chats, video, loading, fuzzy } = this.state;
     return (
       <div className="video-details">
         <div className="left-nav">
           <DashMenu />
         </div>
-        {loading ? (
+
+        {this.state.loading ? (
           <img src={"/loading-spinner.gif"} alt={""} className="spinner" />
         ) : (
           <div>
-            <h3 className="video-header">{video.topic}</h3>
+            <h3 className="video-header">{this.state.video.topic}</h3>
             <div className="detail-search">
               <form onSubmit={this.handleSearch}>
                 <input
-                  onChange={(e) => {
-                    this.setState({ search: e.target.value });
-                  }}
+                  onChange={(e) => this.setState({ search: e.target.value })}
                   type="text"
                   className="detail-searchbar"
                 />
@@ -109,15 +85,19 @@ export default class VideoDetails extends Component {
             </div>
             <div className="video-detail">
               <div className="video">
-                <Player video_url={video.video_play_url} />
+                <Player
+                  timeStamp={this.state.timeStamp}
+                  video_url={this.state.video.video_play_url}
+                />
                 <div className="chat">
-                  {chats.map((chat) => (
+                  {this.state.chats.map((chat) => (
                     <div>
                       {chat.timestamp} {chat.speaker} {chat.text}
                     </div>
                   ))}
                 </div>
               </div>
+
               <div className="buttons">
                 <button
                   onClick={this.handleFavorite}
@@ -129,34 +109,15 @@ export default class VideoDetails extends Component {
               </div>
 
               <div className="transcript">
-                {/* example: data = [{ item: { title: "title"}}] */}
-                {/* data.map((e) => console.log(e.item.title)) */}
-                {transcript.map((trans) => {
-                  if (fuzzy.length > 0) {
-                    fuzzy?.map((match) => {
-                      if (match.item.text === trans.text) {
-                        {
-                          /* console.log("if"); */
-                        }
-                        <div className="highlight-me" key={trans.time_start}>
-                          ({trans.time_start}) {trans.text}
-                        </div>;
-                      } else {
-                        {
-                          /* console.log("else"); */
-                        }
-                        <div key={trans.time_start}>
-                          ({trans.time_start}) {trans.text}
-                        </div>;
-                      }
-                    });
-                  }
-                  return (
-                    <div key={trans.time_start}>
-                      ({trans.time_start}) {trans.text}
-                    </div>
-                  );
-                })}
+                {this.state.transcript.map((trans) => (
+                  <div
+                    onClick={this.handleTimeStamp}
+                    className={trans.time_start}
+                    key={trans.time_start}
+                  >
+                    ({trans.time_start}) {trans.text}
+                  </div>
+                ))}
               </div>
             </div>
           </div>
