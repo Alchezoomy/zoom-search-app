@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import DashMenu from './DashMenu.js'
 import Player from './Player.js'
+import ReactPlayer from 'react-player';
 import {
 
     fetchVideo,
@@ -12,6 +13,9 @@ import {
 } from './Fetches.js';
 
 export default class VideoDetails extends Component {
+    ref = player => {
+        this.player = player
+    }
 
     state = {
         loading: false,
@@ -36,8 +40,8 @@ export default class VideoDetails extends Component {
             chats: chats,
             loading: false
         })
-        console.log(transcript)
-
+        // console.log(transcript)
+        await this.player.seekTo(this.state.timeStamp);
     }
 
 
@@ -81,11 +85,9 @@ export default class VideoDetails extends Component {
 
     }
     handleTimeStamp = async (e) => {
-
-        await this.setState({
-            timeStamp: Number(e.target.className)
-        })
-        console.log(this.state.timeStamp)
+        const newTime = Math.floor(e.target.className);
+        console.log(newTime)
+        await this.player.seekTo(newTime);
 
     }
 
@@ -112,9 +114,15 @@ export default class VideoDetails extends Component {
                             </div>
                             <div className='video-detail'>
                                 <div className='video'>
-                                    <Player
-                                        timeStamp={this.state.timeStamp}
-                                        video_url={this.state.video.video_play_url} />
+                                    <div>
+                                        <ReactPlayer
+                                            // ref
+                                            // timeStamp={this.state.timeStamp}
+                                            ref={this.ref}
+                                            url={this.state.video.video_play_url}
+                                            controls
+                                        />
+                                    </div>
                                     <div className='chat'>{this.state.chats.map(chat =>
                                         <div>{chat.timestamp} {chat.speaker} {chat.text}</div>
                                     )}

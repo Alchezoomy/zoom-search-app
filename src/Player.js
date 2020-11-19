@@ -33,7 +33,7 @@ export default class Player extends Component {
         return (
             <div>
                 <ReactPlayer
-                    ref={this.ref}
+                    ref={this.props.ref}
                     url={this.props.video_url}
 
                     controls
