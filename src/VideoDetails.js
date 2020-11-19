@@ -17,9 +17,10 @@ export default class VideoDetails extends Component {
     search: "",
     transcript: [],
     chats: [],
-    timeStamp: 200,
+    timeStamp: 1,
     fuzzy: [],
   };
+
   componentDidMount = async () => {
     await this.setState({ loading: true });
     const video = await fetchVideo(
@@ -54,6 +55,24 @@ export default class VideoDetails extends Component {
     console.log(newFavorite);
 
     await favoriteVideo(newFavorite, this.props.token);
+  };
+
+  handleBookmark = async (identifier, text, time_start, speaker, id) => {
+    const newBookmark = {
+      id: id,
+      uuid: this.state.video.uuid,
+
+      topic: this.state.video.topic,
+      host_id: this.state.video.host_id,
+      start_time: this.state.video.start_time,
+      time_start: time_start,
+      speaker: speaker,
+      identifier: identifier,
+      text: text,
+      owner_id: this.state.video.owner_id,
+    };
+
+    await bookmarkVideo(newBookmark, this.props.token);
   };
 
   handleTimeStamp = async (e) => {
