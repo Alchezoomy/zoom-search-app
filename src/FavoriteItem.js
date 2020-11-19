@@ -15,7 +15,7 @@ export default class FavoriteItem extends Component {
                     </Link>
                 </div>
                 <div className='remove-favorite-button'>
-                <button className='remove-button' onClick={this.props.handleDelete} value={this.props.uuid}>X</button>
+                    <button className='remove-button' onClick={this.props.handleDelete} value={this.props.uuid}>X</button>
                 </div>
             </div>
         )

@@ -27,18 +27,20 @@ export default class Student extends Component {
             allVideos: allVideos,
             loading: false
         })
-    }
+    };
+
     handleFavorite = async (e) => {
         await favoriteVideo(e.target.value, this.props.token);
-    }
+    };
 
     handleSearch = async (e) => {
         e.preventDefault()
         await searchPublishedVideos(this.state.search, this.props.token);
-    }
+    };
 
     render() {
         return (
+
             <div className='student-dashboard'>
                 <div className='left-nav'>
                     <DashMenu />
@@ -58,16 +60,15 @@ export default class Student extends Component {
                 </div>
                 <div className='video-box'>
                     {
-                        this.state.loading
-                            ? <img src={'/loading-spinner.gif'} alt={''} />
-                            :
-                            this.state.allVideos.map(video =>
-                                <div key={`${video.uuid}${Math.random()}`} >
-                                    <VideoList
-                                        video={video} />
-                                </div>
-                            )
-
+                    this.state.loading
+                        ? <img src={'/loading-spinner.gif'} alt={''} />
+                        :
+                        this.state.allVideos.map(video =>
+                            <div key={`${video.uuid}${Math.random()}`} >
+                                <VideoList
+                                    video={video} />
+                            </div>
+                        )
                     }
                 </div>
             </div>

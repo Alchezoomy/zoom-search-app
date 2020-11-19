@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { fetchBookmarks, deleteBookmark } from './Fetches'
 import DashMenu from './DashMenu.js'
 import { Link } from 'react-router-dom';
+import BookmarkList from './BookmarkList';
 
 
 export default class Bookmarks extends Component {
@@ -38,21 +39,25 @@ export default class Bookmarks extends Component {
                     <DashMenu
                     />
                 </div>
-                {this.state.bookmarks.map(video =>
-                    <div key={`${video.uuid}${Math.random()}`}>  <Link to={`/meeting/${video.uuid}`}>
 
-                        <div> {video.topic} </div>
-                        <div> {video.time_start} </div>
+            <h3 className='dashboard'>Bookmarks Dashboard</h3>
 
-
-                    </Link><div> {video.text} </div>
-                        <button onClick={this.handleDelete} value={video.id}>Remove Bookmark </button>
-                    </div>
-
-
-                )
-                }
-            </div>
+                <div classname='video-box'>
+                    {
+                        this.state.loading
+                            ? <img src={'/loading-spinner.gif'} alt={''} />
+                            :
+                            this.state.bookmarks.map(video =>
+                            <div key={`${video.uuid}${Math.random()}`}> 
+                                <BookmarkList
+                                token={this.props.token}
+                                video={video}
+                                handleDelete={this.handleDelete} />
+                            </div>
+                            )
+                    }
+                </div>
+            </div>    
         )
     }
 };

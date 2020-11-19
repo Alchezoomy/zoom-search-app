@@ -55,10 +55,8 @@ export default class Favorites extends Component {
                                     handleDelete={this.handleDelete} />
                                 </div>
                                 )
-
                     }
                     </div>
-
                 </div>
         )
     }
