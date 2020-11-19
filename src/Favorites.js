@@ -34,7 +34,7 @@ export default class Favorites extends Component {
     render() {
         return (
 
-            <div>
+            <div className ='favorites'>
                 <div className='left-nav'>
                     <DashMenu
                     />

@@ -23,9 +23,16 @@ html, body {
 }
 
 .header {
+  position: fixed;
+  width: 100%;
+  top: 0;
   padding: 1.5%;
   background-color: #2D8CFF;
   text-align: center;
+}
+
+.header-shell {
+  height: 150px;
 }
 
 .alchezoomy {
@@ -41,6 +48,7 @@ html, body {
 }
 
 .landing {
+
   font-family: LatoRegular;
   text-align: center;
   color: #232333;
@@ -140,6 +148,7 @@ input {
 }
 
 .sign-up-page {
+
   text-align: center;
 }
 
@@ -150,12 +159,14 @@ input {
 }
 
 .student-dashboard {
+
   font-family: LatoRegular;
   color: #232333;
   text-align: center;
 }
 
 .dash-menu {
+  position: fixed;
   cursor: crosshair;
   text-align: center;
   width: 12%;
@@ -173,7 +184,8 @@ input {
 }
 
 .content {
-  float: left;
+  position: absolute;
+  margin-top: 5%;
   text-align: center;
   width: 14%;
   margin-left: 1%;
@@ -191,7 +203,7 @@ input {
 .dashboard {
   position: absolute;
   font-family: LatoBold;
-  margin-top: -2%;
+  margin-top: -4%;
   margin-left: 20%;
   font-size: 3.5vw;
 }
@@ -236,7 +248,7 @@ input {
 
 .video-box {
   display: absolute;
-  margin-top: 6%;
+  margin-top: 3%;
   margin-left: 20%;
   margin-right: auto;
   margin-bottom: 5%;
@@ -247,21 +259,31 @@ input {
   overflow-y: scroll;
 }
 
-.video-item {
+.video-item, .favorite-item {
   font-family: LatoRegular;
   border: solid 2px #747487;
   padding-bottom: 2%;
   color: #2D8CFF;
 }
 
-.video-item:hover {
+
+.favorite-item {
+  text-align: center;
+  padding-right: 1.5%;
+}
+
+a {
+  text-decoration: none;
+}
+
+.video-item:hover, .favorite-item:hover {
   background-color: #2D8CFF;
   color: white;
   transition-duration: 1s;
 }
 
-.meeting-link {
-  text-decoration: none;
+.favorite-topic {
+  width: 90%;
 }
 
 .topic {
@@ -281,14 +303,16 @@ input {
 .video-header {
   position: absolute;
   font-family: LatoBold;
-  margin-top: -3%;
+  margin-top: 0%;
   margin-left: 17%;
   font-size: 110%;
+  z-index: -1;
 }
 
 .detail-search {
   position: relative;
   margin-left: 900px;
+  z-index: -1;
 }
 
 .detail-searchbar {
@@ -355,6 +379,26 @@ input {
   font-family: LatoRegular;
   border: solid 1px #2D8CFF;
   border-radius: 5px;
+}
+
+.favorites {
+  margin-top: 150px;
+}
+
+.remove-favorite-button {
+  float: right;
+  margin-top: -11%;
+  margin-right: 1%;
+  height: 30px;
+  background-color: #E4E4ED;
+  border: solid 1px #232333;
+  border-radius: 5px;
+}
+
+.remove-favorite-button:hover {
+  background-color: #747487;
+  color: white;
+  transition-duration: 1s;
 }
 
 .footer {

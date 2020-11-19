@@ -8,6 +8,7 @@ import {
   favoriteVideo,
   fetchTranscript,
   fetchChat,
+  bookmarkVideo
 } from "./Fetches.js";
 
 export default class VideoDetails extends Component {
@@ -19,6 +20,7 @@ export default class VideoDetails extends Component {
     chats: [],
     timeStamp: 1,
     fuzzy: [],
+    favorited: ''
   };
 
   componentDidMount = async () => {
@@ -40,8 +42,19 @@ export default class VideoDetails extends Component {
       transcript: transcript,
       chats: chats,
       loading: false,
+      favorited: this.favorited
     });
   };
+
+  handleFavoriteButton = async (e) => {
+      if (!this.state.favorited === true) {
+        e.target.style.backgroundColor = 'white';
+        e.target.style.color = '#2D8CFF';
+      } else if (this.state.favorited === true) {
+          e.target.style.backgroundColor = '#747487';
+          e.target.style.color = 'white';
+      }
+  }
 
   handleFavorite = async (e) => {
     const newFavorite = {
@@ -52,16 +65,20 @@ export default class VideoDetails extends Component {
       text: "",
       owner_id: this.state.video.owner_id,
     };
-    console.log(newFavorite);
 
     await favoriteVideo(newFavorite, this.props.token);
+    
+    this.setState({
+        favorited: true
+    })
+
+    await this.handleFavoriteButton(e);
   };
 
   handleBookmark = async (identifier, text, time_start, speaker, id) => {
     const newBookmark = {
       id: id,
       uuid: this.state.video.uuid,
-
       topic: this.state.video.topic,
       host_id: this.state.video.host_id,
       start_time: this.state.video.start_time,
@@ -175,7 +192,6 @@ export default class VideoDetails extends Component {
                             className={trans.time_start}
                             key={trans.time_start}
                           >
-                            {/* ({trans.time_start}) {trans.text} */}
                           </div>
                         );
                       }
