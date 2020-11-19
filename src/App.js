@@ -26,6 +26,7 @@ export default class App extends Component {
     code: '',
     username: localStorage.getItem('USERNAME') || '',
     token: localStorage.getItem('TOKEN') || '',
+    favorites: []
   }
 
   changeTokenAndUsername = (name, token) => {
@@ -37,14 +38,6 @@ export default class App extends Component {
       token: token,
     })
   }
-
-  // logOut = () => {
-  //   localStorage.setItem('TOKEN', '');
-  //   localStorage.setItem('USERNAME', '');
-
-  //   this.setState({
-  //     username: '',
-  //     token: '',
 
   handleSetState = (stateObject) => {
     this.setState(stateObject);
@@ -81,6 +74,7 @@ export default class App extends Component {
                   {...routerProps}
                   token={this.state.token}
                   logOut={this.logOut}
+                  handleSetState={this.handleSetState}
                 />
               }
 
@@ -119,6 +113,7 @@ export default class App extends Component {
 
                   {...routerProps}
                   token={this.state.token}
+                  favorites={this.state.favorites}
                 />
               }
 

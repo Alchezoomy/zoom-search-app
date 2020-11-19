@@ -52,7 +52,9 @@ export default class VideoDetails extends Component {
       loading: false,
       favorited: this.favorited,
     });
-    console.log(`state: ${this.state.timeStamp}`)
+
+    this.determineFavorite()
+
     this.player.seekTo(this.state.timeStamp);
 
   };
@@ -67,6 +69,14 @@ export default class VideoDetails extends Component {
     }
   };
 
+  determineFavorite = async (e) => {
+    const isFavorite = this.props.favorites.some(favorite => favorite.uuid === this.state.video.uuid)
+
+    this.setState({
+      favorited: isFavorite
+    })
+  }
+
   handleFavorite = async (e) => {
     const newFavorite = {
       uuid: this.state.video.uuid,
@@ -79,11 +89,11 @@ export default class VideoDetails extends Component {
 
     await favoriteVideo(newFavorite, this.props.token);
 
-    this.setState({
-      favorited: true,
-    });
+    // this.setState({
+    //   favorited: true,
+    // });
 
-    await this.handleFavoriteButton(e);
+    // await this.handleFavoriteButton(e);
   };
 
   handleBookmark = async (identifier, text, time_start, speaker, id) => {
