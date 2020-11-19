@@ -39,7 +39,7 @@ export default class Bookmarks extends Component {
                     />
                 </div>
 
-            <h3 className='dashboard'>Bookmarks Dashboard</h3>
+                <h3 className='dashboard'>Bookmarks Dashboard</h3>
 
                 <div className='video-box'>
                     {
@@ -47,16 +47,17 @@ export default class Bookmarks extends Component {
                             ? <img src={'/loading-spinner.gif'} alt={''} />
                             :
                             this.state.bookmarks.map(video =>
-                            <div key={`${video.uuid}${Math.random()}`}> 
-                                <BookmarkList
-                                token={this.props.token}
-                                video={video}
-                                handleDelete={this.handleDelete} />
-                            </div>
+                                <div key={`${video.uuid}${Math.random()}`}>
+                                    <BookmarkList
+                                        id={video.id}
+                                        token={this.props.token}
+                                        video={video}
+                                        handleDelete={this.handleDelete} />
+                                </div>
                             )
                     }
                 </div>
-            </div>    
+            </div>
         )
     }
 };

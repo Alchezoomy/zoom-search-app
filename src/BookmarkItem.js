@@ -10,14 +10,14 @@ export default class BookmarkItem extends Component {
         return (
             <div className='favorite-item'>
                 <div className='favorite-item-link'>
-                    <Link className='meeting-link' to={`/meeting/${this.props.uuid}`}>
+                    <Link className='meeting-link' to={`/meeting/${this.props.uuid}?time=${this.props.time_start}`}>
                         <p className='favorite-topic'>{this.props.topic}</p>
                         <span className='upload-date'>{this.props.time_start}</span>
                     </Link>
                     {VideoItem.text}
                 </div>
                 <div className='remove-favorite-button'>
-                    <button className='remove-button' onClick={this.props.handleDelete} value={this.props.uuid}>X</button>
+                    <button className='remove-button' onClick={this.props.handleDelete} value={this.props.id}>X</button>
                 </div>
             </div>
         )
