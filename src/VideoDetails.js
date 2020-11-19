@@ -8,6 +8,7 @@ import {
   favoriteVideo,
   fetchTranscript,
   fetchChat,
+  bookmarkVideo,
 } from "./Fetches.js";
 
 export default class VideoDetails extends Component {
@@ -97,7 +98,6 @@ export default class VideoDetails extends Component {
 
     const fuse = new Fuse(transcript, options);
     const fuzzysearch = fuse.search(search);
-    console.log("fuzzysearch: ", fuzzysearch);
 
     this.setState({
       fuzzy: fuzzysearch,
@@ -108,6 +108,21 @@ export default class VideoDetails extends Component {
 
   render() {
     const { transcript, chats, video, loading, fuzzy, timeStamp } = this.state;
+
+    const isSearching = fuzzy.length > 0;
+
+    const fuzzySet = new Set(fuzzy.map((match) => match.item.text));
+
+    const seedTranscript = (script) => (
+      <div
+        onClick={this.handleTimeStamp}
+        className={script.time_start}
+        key={script.time_start}
+      >
+        ({script.time_start}) {script.text}{" "}
+      </div>
+    );
+
     return (
       <div className="video-details">
         <div className="left-nav">
@@ -155,42 +170,12 @@ export default class VideoDetails extends Component {
               </div>
 
               <div className="transcript">
-                {transcript.map((trans) => {
-                  if (fuzzy.length > 0) {
-                    return fuzzy?.map((match) => {
-                      if (match.item.text === trans.text) {
-                        return (
-                          <div
-                            onClick={this.handleTimeStamp}
-                            className={`${trans.time_start} highlight-me`}
-                            key={`${trans.time_start}${trans.id}`}
-                          >
-                            ({trans.time_start}) {trans.text}
-                          </div>
-                        );
-                      } else {
-                        return (
-                          <div
-                            onClick={this.handleTimeStamp}
-                            className={trans.time_start}
-                            key={trans.time_start}
-                          >
-                            {/* ({trans.time_start}) {trans.text} */}
-                          </div>
-                        );
-                      }
-                    });
-                  }
-                  return (
-                    <div
-                      onClick={this.handleTimeStamp}
-                      className={trans.time_start}
-                      key={trans.time_start}
-                    >
-                      ({trans.time_start}) {trans.text}
-                    </div>
-                  );
-                })}
+                {!isSearching &&
+                  transcript.map((script) => seedTranscript(script))}
+                {isSearching &&
+                  transcript.map((script) =>
+                    transcriptRender(fuzzySet, script, this.handleTimeStamp)
+                  )}
               </div>
             </div>
           </div>
@@ -199,3 +184,29 @@ export default class VideoDetails extends Component {
     );
   }
 }
+
+const transcriptRender = (fuzzySet, script, handleTimeStamp) => {
+  if (fuzzySet.has(script.text)) {
+    return searchHighlight(script, handleTimeStamp);
+  } else {
+    return searchTranscript(script, handleTimeStamp);
+  }
+};
+
+const searchHighlight = (script, handleTimeStamp) => (
+  <div
+    onClick={handleTimeStamp}
+    className={`${script.time_start} highlight-me`}
+    key={script.time_start}
+  >
+    ({script.time_start}) {script.text}
+  </div>
+);
+
+const searchTranscript = (script, handleTimeStamp) => (
+  <div
+    onClick={handleTimeStamp}
+    className={script.time_start}
+    key={script.time_start}
+  ></div>
+);
