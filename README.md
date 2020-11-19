@@ -1,6 +1,6 @@
 # _AlcheZOOMy_
 
-#### **AlcheZOOMy** is an appliction that utilizes the Zoom API to allows user to search and favorite videos, transcripts and chats from various published Alchemy zoom meetings. Designed and built over a five-day sprint as a part of the Alchemy Code Lab's curriculum, 11-20-2020
+#### **AlcheZOOMy** is an application that utilizes the Zoom API to allow users to search, sort, and favorite videos, transcripts, and chats from various published Alchemy zoom meetings. Designed and built over a five-day sprint as a part of the Alchemy Code Lab's curriculum, 11-20-2020
 
 #### **The AlcheZOOMies**:
 - Dee Watson
@@ -12,7 +12,7 @@
 #
 ## Description
 
-_Once registered and logged in, an AlcheZOOMy user can search through published videos, transcripts, and chat logs to find keyword or timestamp specific information. Meeting video's can be filtered by category, specific timestamps, speakers or keywords can be favorited for future reference._
+_Once registered and logged in, an AlcheZOOMy user can search by keyword or sort the various published Alchemy zoom meetings by date, host, or favorites. Upon selecting a meeting, the user is linked to a video player to watch the video,  explore the meeting chat log, and search the transcript data. The user can favorite an entire meeting or bookmark a specific timestamp for future reference._
 
 _This repository contains the frontend data only and can be viewed live on [Netlify](https://alchezoomy.netlify.app/). The backend code can be found on in a separate [repository](https://github.com/Alchezoomy/zoom-search-sql) and the deployed Node server is available on [Heroku](https://alchezoomy.herokuapp.com/)._
 
