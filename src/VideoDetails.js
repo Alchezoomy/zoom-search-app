@@ -184,7 +184,7 @@ export default class VideoDetails extends Component {
                     <button className='bookmark-button' onClick={() => 
                     this.handleBookmark(trans.identifier, trans.text, trans.time_start, trans.speaker, trans.id)}>
                       {trans.time_start.toFixed(1)}</button>{trans.text}</div>
-                                )}
+                      )}
               </div>
               </div>
             </div>
