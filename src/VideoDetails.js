@@ -18,6 +18,7 @@ export default class VideoDetails extends Component {
     transcript: [],
     chats: [],
     timeStamp: 200,
+    fuzzy: [],
   };
   componentDidMount = async () => {
     await this.setState({ loading: true });
@@ -54,6 +55,7 @@ export default class VideoDetails extends Component {
 
     await favoriteVideo(newFavorite, this.props.token);
   };
+
   handleTimeStamp = async (e) => {
     await this.setState({
       timeStamp: e.target.className,
@@ -61,18 +63,43 @@ export default class VideoDetails extends Component {
     console.log(this.state.timeStamp);
   };
 
+  handleSearch = (e) => {
+    e.preventDefault();
+
+    const { transcript, search } = this.state;
+
+    const options = {
+      includeScore: true,
+      shouldSort: true,
+      ignoreLocation: true,
+      threshold: 0.2,
+      keys: ["text"],
+    };
+
+    const fuse = new Fuse(transcript, options);
+    const fuzzysearch = fuse.search(search);
+    console.log("fuzzysearch: ", fuzzysearch);
+
+    this.setState({
+      fuzzy: fuzzysearch,
+    });
+
+    console.log("search: ", search);
+  };
+
   render() {
+    const { transcript, chats, video, loading, fuzzy, timeStamp } = this.state;
     return (
       <div className="video-details">
         <div className="left-nav">
           <DashMenu />
         </div>
 
-        {this.state.loading ? (
+        {loading ? (
           <img src={"/loading-spinner.gif"} alt={""} className="spinner" />
         ) : (
           <div>
-            <h3 className="video-header">{this.state.video.topic}</h3>
+            <h3 className="video-header">{video.topic}</h3>
             <div className="detail-search">
               <form onSubmit={this.handleSearch}>
                 <input
@@ -86,11 +113,11 @@ export default class VideoDetails extends Component {
             <div className="video-detail">
               <div className="video">
                 <Player
-                  timeStamp={this.state.timeStamp}
-                  video_url={this.state.video.video_play_url}
+                  timeStamp={timeStamp}
+                  video_url={video.video_play_url}
                 />
                 <div className="chat">
-                  {this.state.chats.map((chat) => (
+                  {chats.map((chat) => (
                     <div>
                       {chat.timestamp} {chat.speaker} {chat.text}
                     </div>
@@ -109,15 +136,42 @@ export default class VideoDetails extends Component {
               </div>
 
               <div className="transcript">
-                {this.state.transcript.map((trans) => (
-                  <div
-                    onClick={this.handleTimeStamp}
-                    className={trans.time_start}
-                    key={trans.time_start}
-                  >
-                    ({trans.time_start}) {trans.text}
-                  </div>
-                ))}
+                {transcript.map((trans) => {
+                  if (fuzzy.length > 0) {
+                    return fuzzy?.map((match) => {
+                      if (match.item.text === trans.text) {
+                        return (
+                          <div
+                            onClick={this.handleTimeStamp}
+                            className={`${trans.time_start} highlight-me`}
+                            key={trans.time_start}
+                          >
+                            ({trans.time_start}) {trans.text}
+                          </div>
+                        );
+                      } else {
+                        return (
+                          <div
+                            onClick={this.handleTimeStamp}
+                            className={trans.time_start}
+                            key={trans.time_start}
+                          >
+                            {/* ({trans.time_start}) {trans.text} */}
+                          </div>
+                        );
+                      }
+                    });
+                  }
+                  return (
+                    <div
+                      onClick={this.handleTimeStamp}
+                      className={trans.time_start}
+                      key={trans.time_start}
+                    >
+                      ({trans.time_start}) {trans.text}
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
