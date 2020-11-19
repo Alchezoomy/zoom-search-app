@@ -183,7 +183,11 @@ export default class VideoDetails extends Component {
                 <div className="transcript">
                   {!isSearching &&
                     transcript.map((script) =>
-                      seedTranscript(script, this.handleTimeStamp)
+                      seedTranscript(
+                        script,
+                        this.handleTimeStamp,
+                        this.handleBookmark
+                      )
                     )}
                   {isSearching &&
                     transcript.map((script) =>
@@ -204,8 +208,22 @@ export default class VideoDetails extends Component {
   }
 }
 
-const seedTranscript = (script, handleTimeStamp) => (
+const seedTranscript = (script, handleTimeStamp, handleBookmark) => (
   <div onClick={handleTimeStamp} className={script.time_start} key={script.id}>
+    <button
+      className="bookmark-button"
+      onClick={() =>
+        handleBookmark(
+          script.identifier,
+          script.text,
+          script.time_start,
+          script.speaker,
+          script.id
+        )
+      }
+    >
+      {script.time_start.toFixed(1)}
+    </button>
     ({script.time_start}) {script.text}{" "}
   </div>
 );
@@ -219,7 +237,7 @@ const transcriptRender = (
   if (fuzzySet.has(script.text)) {
     return searchHighlight(script, handleTimeStamp, handleBookmark);
   } else {
-    return searchTranscript(script, handleTimeStamp);
+    return searchTranscript(script, handleTimeStamp, handleBookmark);
   }
 };
 
@@ -243,7 +261,7 @@ const searchHighlight = (script, handleTimeStamp, handleBookmark) => (
   </div>
 );
 
-const searchTranscript = (script, handleTimeStamp) => (
+const searchTranscript = (script, handleTimeStamp, handleBookmark) => (
   <div
     onClick={handleTimeStamp}
     className={script.time_start}
