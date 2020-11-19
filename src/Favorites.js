@@ -27,7 +27,6 @@ export default class Favorites extends Component {
         this.setState({
             favorites: favorites,
         })
-        console.log(this.props.token)
 
     }
 

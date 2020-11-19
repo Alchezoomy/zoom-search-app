@@ -51,6 +51,8 @@ export default class VideoDetails extends Component {
       loading: false,
       favorited: this.favorited,
     });
+
+    this.determineFavorite()
   };
 
   handleFavoriteButton = async (e) => {
@@ -62,6 +64,14 @@ export default class VideoDetails extends Component {
       e.target.style.color = "white";
     }
   };
+
+  determineFavorite = async (e) => {
+    const isFavorite = this.props.favorites.some(favorite => favorite.uuid === this.state.video.uuid)
+
+    this.setState({
+      favorited: isFavorite
+    })
+  }
 
   handleFavorite = async (e) => {
     const newFavorite = {
@@ -75,11 +85,11 @@ export default class VideoDetails extends Component {
 
     await favoriteVideo(newFavorite, this.props.token);
 
-    this.setState({
-      favorited: true,
-    });
+    // this.setState({
+    //   favorited: true,
+    // });
 
-    await this.handleFavoriteButton(e);
+    // await this.handleFavoriteButton(e);
   };
 
   handleBookmark = async (identifier, text, time_start, speaker, id) => {
