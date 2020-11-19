@@ -108,7 +108,7 @@ export default class VideoDetails extends Component {
       includeScore: true,
       shouldSort: true,
       ignoreLocation: true,
-      threshold: 0.2,
+      threshold: 0.1,
       keys: ["text"],
     };
 
