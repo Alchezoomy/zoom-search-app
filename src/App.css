@@ -29,6 +29,7 @@ html, body {
   padding: 1.5%;
   background-color: #2D8CFF;
   text-align: center;
+  z-index: 1;
 }
 
 .header-shell {
@@ -324,7 +325,6 @@ a {
 .detail-search {
   position: relative;
   margin-left: 900px;
-  z-index: -1;
 }
 
 .detail-searchbar {
