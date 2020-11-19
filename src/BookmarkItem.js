@@ -12,6 +12,8 @@ export default class BookmarkItem extends Component {
                 <div className='favorite-item-link'>
                     <Link className='meeting-link' to={`/meeting/${this.props.uuid}?${this.props.time_start}`}>
                         <p className='favorite-topic'>{this.props.topic}</p>
+                        <p className='upload-date'>{this.props.text}</p>
+
                         <span className='upload-date'>{this.props.time_start}</span>
                     </Link>
                     {VideoItem.text}
