@@ -161,7 +161,7 @@ export default class VideoDetails extends Component {
                   <h4 className="chat-title">Chat</h4>
                   <div className="chat">
                     {chats.map((chat) => (
-                      <div>
+                      <div key={chat.id}>
                         {chat.timestamp} {chat.speaker} {chat.text}
                       </div>
                     ))}
@@ -200,11 +200,7 @@ export default class VideoDetails extends Component {
 }
 
 const seedTranscript = (script, handleTimeStamp) => (
-  <div
-    onClick={handleTimeStamp}
-    className={script.time_start}
-    key={script.time_start}
-  >
+  <div onClick={handleTimeStamp} className={script.time_start} key={script.id}>
     ({script.time_start}) {script.text}{" "}
   </div>
 );
@@ -221,7 +217,7 @@ const searchHighlight = (script, handleTimeStamp) => (
   <div
     onClick={this.handleTimeStamp}
     className={script.time_start}
-    key={script.time_start}
+    key={script.id}
   >
     <button
       className="bookmark-button"
