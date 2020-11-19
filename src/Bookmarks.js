@@ -1,13 +1,12 @@
 import React, { Component } from 'react'
 import { fetchBookmarks, deleteBookmark } from './Fetches'
 import DashMenu from './DashMenu.js'
-import { Link } from 'react-router-dom';
-import BookmarkList from './BookmarkList';
+import BookmarkList from './BookmarkList.js';
 
 
 export default class Bookmarks extends Component {
     state = {
-        loading: true,
+        loading: false,
         bookmarks: [],
         search: '',
         delete: false
@@ -34,7 +33,7 @@ export default class Bookmarks extends Component {
     render() {
         return (
 
-            <div>
+            <div className='favorites'>
                 <div className='left-nav'>
                     <DashMenu
                     />
@@ -42,7 +41,7 @@ export default class Bookmarks extends Component {
 
             <h3 className='dashboard'>Bookmarks Dashboard</h3>
 
-                <div classname='video-box'>
+                <div className='video-box'>
                     {
                         this.state.loading
                             ? <img src={'/loading-spinner.gif'} alt={''} />
