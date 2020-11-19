@@ -144,7 +144,7 @@ export default class VideoDetails extends Component {
                           <div
                             onClick={this.handleTimeStamp}
                             className={`${trans.time_start} highlight-me`}
-                            key={trans.time_start}
+                            key={`${trans.time_start}${trans.id}`}
                           >
                             ({trans.time_start}) {trans.text}
                           </div>
