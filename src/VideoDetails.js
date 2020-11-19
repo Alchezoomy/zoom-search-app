@@ -152,12 +152,15 @@ export default class VideoDetails extends Component {
                   timeStamp={timeStamp}
                   video_url={video.video_play_url}
                 />
+                <div className='chat-shell'>
+                  <h4 className='chat-title'>Chat</h4>
                 <div className="chat">
                   {chats.map((chat) => (
                     <div>
                       {chat.timestamp} {chat.speaker} {chat.text}
                     </div>
                   ))}
+                </div>
                 </div>
               </div>
 
@@ -168,45 +171,21 @@ export default class VideoDetails extends Component {
                 >
                   Favorite
                 </button>
-                <button className="bookmarks">Bookmark Timestamp</button>
               </div>
 
-              <div className="transcript">
-                {transcript.map((trans) => {
-                  if (fuzzy.length > 0) {
-                    return fuzzy?.map((match) => {
-                      if (match.item.text === trans.text) {
-                        return (
-                          <div
-                            onClick={this.handleTimeStamp}
-                            className={`${trans.time_start} highlight-me`}
-                            key={`${trans.time_start}${trans.id}`}
-                          >
-                            ({trans.time_start}) {trans.text}
-                          </div>
-                        );
-                      } else {
-                        return (
-                          <div
-                            onClick={this.handleTimeStamp}
-                            className={trans.time_start}
-                            key={trans.time_start}
-                          >
-                          </div>
-                        );
-                      }
-                    });
-                  }
-                  return (
-                    <div
-                      onClick={this.handleTimeStamp}
-                      className={trans.time_start}
-                      key={trans.time_start}
-                    >
-                      ({trans.time_start}) {trans.text}
-                    </div>
-                  );
-                })}
+              <div className='transcript-shell'>
+                <h5 className='bookmark-timestamp'>Bookmark Timestamp</h5>
+                <h4 className='transcript-header'>Transcript
+                </h4>
+                <div className='transcript'>{this.state.transcript.map(trans =>
+                  <div 
+                  onClick={this.handleTimeStamp} className={trans.time_start} 
+                  key={trans.time_start}>
+                    <button className='bookmark-button' onClick={() => 
+                    this.handleBookmark(trans.identifier, trans.text, trans.time_start, trans.speaker, trans.id)}>
+                      {trans.time_start.toFixed(1)}</button>{trans.text}</div>
+                                )}
+              </div>
               </div>
             </div>
           </div>

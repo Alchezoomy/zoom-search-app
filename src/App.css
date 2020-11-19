@@ -159,10 +159,8 @@ input {
 }
 
 .student-dashboard {
-
   font-family: LatoRegular;
   color: #232333;
-  text-align: center;
 }
 
 .dash-menu {
@@ -184,7 +182,7 @@ input {
 }
 
 .content {
-  position: absolute;
+  position: fixed;
   margin-top: 5%;
   text-align: center;
   width: 14%;
@@ -201,16 +199,15 @@ input {
 }
 
 .dashboard {
-  position: absolute;
   font-family: LatoBold;
-  margin-top: -4%;
+  margin-top: 0;
   margin-left: 20%;
   font-size: 3.5vw;
 }
 
 .search-and-sort {
   position: absolute;
-  margin-top: -2%;
+  margin-top: -6%;
   text-align: right;
   width: 30%;
   right: 5%;
@@ -254,6 +251,7 @@ input {
   margin-bottom: 5%;
   width: 55%;
   height: 40vw;
+  text-align: center;
   border: solid 1px #2D8CFF;
   text-decoration: none;
   overflow-y: scroll;
@@ -266,19 +264,33 @@ input {
   color: #2D8CFF;
 }
 
+.meeting-link {
+  font-family: LatoRegular;
+  color: #2D8CFF;
+}
+
+.meeting-link:hover {
+  cursor: crosshair;
+}
+
 
 .favorite-item {
   text-align: center;
-  padding-right: 1.5%;
+  padding-right: 1%;
 }
 
 a {
   text-decoration: none;
 }
 
-.video-item:hover, .favorite-item:hover {
+.video-item:hover {
   background-color: #2D8CFF;
   color: white;
+  transition-duration: 1s;
+}
+
+.favorite-item:hover {
+  background-color: #BABACC;
   transition-duration: 1s;
 }
 
@@ -334,12 +346,25 @@ a {
   margin-top: 2%;
 }
 
+.chat-shell {
+  width: 250px;
+  height: 350px;
+  margin-top: -400px;
+  margin-left: 680px;
+}
+
+.chat-title {
+  float: right;
+  text-align: center;
+  margin-bottom: 10px;
+  font-family: LatoBold;
+  font-size: 17pt;
+  width: 250px;
+}
+
 .chat {
   display: fixed;
-  width: 250px;
-  height: 337px;
-  margin-top: -360px;
-  margin-left: 680px;
+  height: 590px;
   padding: 1%;
   border: solid 1px #2D8CFF;
   border-radius: 5px;
@@ -347,32 +372,62 @@ a {
 }
 
 .buttons {
-  margin-top: 2vw;
+  margin-top: 70px;
   margin-left: 17%;
 }
 
 .favorite-button {
   width: 100px;
-  margin-right: 390px;
+  margin-left: 545px;
   background-color: white;
   border: solid 1px #2D8CFF;
   border-radius: 5px;
 }
 
-.bookmarks {
-  position: absolute;
-  width: 150px;
+.bookmark-timestamp {
+  float: left;
+  width: 75px;
+  margin-left: 1%;
+  margin-bottom: 0;
+  overflow-wrap: normal;
+}
+
+.transcript-header {
+  text-align: center;
+  font-family: LatoBold;
+  font-size: 17pt;
+  width: 555px;
+}
+
+.bookmark-button {
+  width: 75px;
+  margin-right: 1%;
   background-color: white;
+  color: #2D8CFF;
   border: solid 1px #2D8CFF;
   border-radius: 5px;
+}
+
+.bookmark-button:hover {
+  cursor: crosshair;
+  background-color: #2D8CFF;
+  color: white;
+}
+
+.transcript-shell {
+  position: absolute;
+  width: 630px;
+  height: 170px;
+  margin-top: -30px;
+  margin-left: 17%;
+  z-index: -1;
 }
 
 .transcript {
   position: relative;
   width: 630px;
-  height: 150px;
-  margin-top: 2vh;
-  margin-left: 17%;
+  height: 170px;
+  margin-top: -15px;
   margin-bottom: 100px;
   padding: .5%;
   overflow-y: scroll;
@@ -381,24 +436,26 @@ a {
   border-radius: 5px;
 }
 
-.favorites {
-  margin-top: 150px;
-}
-
 .remove-favorite-button {
   float: right;
-  margin-top: -11%;
+  width: 20px;
+  height: 20px;
+  margin-top: -60px;
   margin-right: 1%;
+  padding: 3%;
   height: 30px;
-  background-color: #E4E4ED;
-  border: solid 1px #232333;
-  border-radius: 5px;
 }
 
-.remove-favorite-button:hover {
-  background-color: #747487;
-  color: white;
-  transition-duration: 1s;
+.remove-button {
+  border: none;
+  font-size: 15pt;
+  color: #747487;
+  background-color: #E4E4ED;
+  border-radius: 10px;
+}
+
+.remove-button:hover {
+  cursor: crosshair;
 }
 
 .footer {
