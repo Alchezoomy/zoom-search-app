@@ -161,7 +161,7 @@ export default class VideoDetails extends Component {
                   <h4 className="chat-title">Chat</h4>
                   <div className="chat">
                     {chats.map((chat) => (
-                      <div>
+                      <div key={chat.id}>
                         {chat.timestamp} {chat.speaker} {chat.text}
                       </div>
                     ))}
@@ -187,7 +187,12 @@ export default class VideoDetails extends Component {
                     )}
                   {isSearching &&
                     transcript.map((script) =>
-                      transcriptRender(fuzzySet, script, this.handleTimeStamp)
+                      transcriptRender(
+                        fuzzySet,
+                        script,
+                        this.handleTimeStamp,
+                        this.handleBookmark
+                      )
                     )}
                 </div>
               </div>
@@ -200,33 +205,30 @@ export default class VideoDetails extends Component {
 }
 
 const seedTranscript = (script, handleTimeStamp) => (
-  <div
-    onClick={handleTimeStamp}
-    className={script.time_start}
-    key={script.time_start}
-  >
+  <div onClick={handleTimeStamp} className={script.time_start} key={script.id}>
     ({script.time_start}) {script.text}{" "}
   </div>
 );
 
-const transcriptRender = (fuzzySet, script, handleTimeStamp) => {
+const transcriptRender = (
+  fuzzySet,
+  script,
+  handleTimeStamp,
+  handleBookmark
+) => {
   if (fuzzySet.has(script.text)) {
-    return searchHighlight(script, handleTimeStamp);
+    return searchHighlight(script, handleTimeStamp, handleBookmark);
   } else {
     return searchTranscript(script, handleTimeStamp);
   }
 };
 
-const searchHighlight = (script, handleTimeStamp) => (
-  <div
-    onClick={this.handleTimeStamp}
-    className={script.time_start}
-    key={script.time_start}
-  >
+const searchHighlight = (script, handleTimeStamp, handleBookmark) => (
+  <div onClick={handleTimeStamp} className={script.time_start} key={script.id}>
     <button
       className="bookmark-button"
       onClick={() =>
-        this.handleBookmark(
+        handleBookmark(
           script.identifier,
           script.text,
           script.time_start,
