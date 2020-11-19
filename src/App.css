@@ -219,6 +219,12 @@ input {
   border-radius: 5px;
 }
 
+.highlight-me {
+  background-color: rgba(246, 246, 84, 0.7);
+  border: 1px solid grey;
+  margin: 3px;
+}
+
 .sort {
   margin-top: 2%;
   font-size: 1.4vw;
