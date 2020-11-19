@@ -83,7 +83,7 @@ export default class VideoDetails extends Component {
       host_id: this.state.video.host_id,
       start_time: this.state.video.start_time,
       time_start: time_start,
-      speaker: speaker,
+      speaker: 'speaker',
       identifier: identifier,
       text: text,
       owner_id: this.state.video.owner_id,
@@ -138,71 +138,71 @@ export default class VideoDetails extends Component {
         {loading ? (
           <img src={"/loading-spinner.gif"} alt={""} className="spinner" />
         ) : (
-          <div>
-            <h3 className="video-header">{video.topic}</h3>
-            <div className="detail-search">
-              <form onSubmit={this.handleSearch}>
-                <input
-                  onChange={(e) => this.setState({ search: e.target.value })}
-                  type="text"
-                  className="detail-searchbar"
-                />
-                <button className="detail-search-button">Search</button>
-              </form>
-            </div>
+            <div>
+              <h3 className="video-header">{video.topic}</h3>
+              <div className="detail-search">
+                <form onSubmit={this.handleSearch}>
+                  <input
+                    onChange={(e) => this.setState({ search: e.target.value })}
+                    type="text"
+                    className="detail-searchbar"
+                  />
+                  <button className="detail-search-button">Search</button>
+                </form>
+              </div>
 
-            <div className="video-detail">
-              <div className="video">
-                <Player
-                  timeStamp={timeStamp}
-                  video_url={video.video_play_url}
-                />
-                <div className="chat-shell">
-                  <h4 className="chat-title">Chat</h4>
-                  <div className="chat">
-                    {chats.map((chat) => (
-                      <div key={chat.id}>
-                        {chat.timestamp} {chat.speaker} {chat.text}
-                      </div>
-                    ))}
+              <div className="video-detail">
+                <div className="video">
+                  <Player
+                    timeStamp={timeStamp}
+                    video_url={video.video_play_url}
+                  />
+                  <div className="chat-shell">
+                    <h4 className="chat-title">Chat</h4>
+                    <div className="chat">
+                      {chats.map((chat) => (
+                        <div key={chat.id}>
+                          {chat.timestamp} {chat.speaker} {chat.text}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="buttons">
+                  <button
+                    onClick={this.handleFavorite}
+                    className="favorite-button"
+                  >
+                    Favorite
+                </button>
+                </div>
+                <div className="transcript-shell">
+                  <h5 className="bookmark-timestamp">Bookmark Timestamp</h5>
+                  <h4 className="transcript-header">Transcript</h4>
+                  <div className="transcript">
+                    {!isSearching &&
+                      transcript.map((script) =>
+                        seedTranscript(
+                          script,
+                          this.handleTimeStamp,
+                          this.handleBookmark
+                        )
+                      )}
+                    {isSearching &&
+                      transcript.map((script) =>
+                        transcriptRender(
+                          fuzzySet,
+                          script,
+                          this.handleTimeStamp,
+                          this.handleBookmark
+                        )
+                      )}
                   </div>
                 </div>
               </div>
-
-              <div className="buttons">
-                <button
-                  onClick={this.handleFavorite}
-                  className="favorite-button"
-                >
-                  Favorite
-                </button>
-              </div>
-              <div className="transcript-shell">
-                <h5 className="bookmark-timestamp">Bookmark Timestamp</h5>
-                <h4 className="transcript-header">Transcript</h4>
-                <div className="transcript">
-                  {!isSearching &&
-                    transcript.map((script) =>
-                      seedTranscript(
-                        script,
-                        this.handleTimeStamp,
-                        this.handleBookmark
-                      )
-                    )}
-                  {isSearching &&
-                    transcript.map((script) =>
-                      transcriptRender(
-                        fuzzySet,
-                        script,
-                        this.handleTimeStamp,
-                        this.handleBookmark
-                      )
-                    )}
-                </div>
-              </div>
             </div>
-          </div>
-        )}
+          )}
       </div>
     );
   }
@@ -218,7 +218,8 @@ const seedTranscript = (script, handleTimeStamp, handleBookmark) => (
           script.text,
           script.time_start,
           script.speaker,
-          script.id
+          script.id,
+          script.speaker
         )
       }
     >
