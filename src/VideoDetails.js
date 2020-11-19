@@ -187,7 +187,12 @@ export default class VideoDetails extends Component {
                     )}
                   {isSearching &&
                     transcript.map((script) =>
-                      transcriptRender(fuzzySet, script, this.handleTimeStamp)
+                      transcriptRender(
+                        fuzzySet,
+                        script,
+                        this.handleTimeStamp,
+                        this.handleBookmark
+                      )
                     )}
                 </div>
               </div>
@@ -205,9 +210,14 @@ const seedTranscript = (script, handleTimeStamp) => (
   </div>
 );
 
-const transcriptRender = (fuzzySet, script, handleTimeStamp) => {
+const transcriptRender = (
+  fuzzySet,
+  script,
+  handleTimeStamp,
+  handleBookmark
+) => {
   if (fuzzySet.has(script.text)) {
-    return searchHighlight(script, handleTimeStamp);
+    return searchHighlight(script, handleTimeStamp, handleBookmark);
   } else {
     return searchTranscript(script, handleTimeStamp);
   }
