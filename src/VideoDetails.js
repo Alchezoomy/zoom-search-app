@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import DashMenu from "./DashMenu.js";
-import ReactPlayer from 'react-player';
+import ReactPlayer from "react-player";
 import Fuse from "fuse.js";
 import {
   fetchVideo,
@@ -19,15 +19,14 @@ export default class VideoDetails extends Component {
     search: "",
     transcript: [],
     chats: [],
-    timeStamp:
-      Number(window.location.search.substr(1)) || 1,
+    timeStamp: Number(window.location.search.substr(1)) || 1,
     fuzzy: [],
     favorited: "",
   };
 
-  ref = player => {
-    this.player = player
-  }
+  ref = (player) => {
+    this.player = player;
+  };
 
   componentDidMount = async () => {
     await this.setState({ loading: true });
@@ -46,7 +45,6 @@ export default class VideoDetails extends Component {
       this.props.token
     );
 
-
     const chats = await fetchChat(this.props.match.params.id, this.props.token);
 
     await this.setState({
@@ -57,10 +55,9 @@ export default class VideoDetails extends Component {
       favorites: favorites
     });
 
-    this.determineFavorite()
+    this.determineFavorite();
 
     this.player.seekTo(this.state.timeStamp);
-
   };
 
   handleFavoriteButton = async (e) => {
@@ -74,6 +71,7 @@ export default class VideoDetails extends Component {
   };
 
   determineFavorite = async (e) => {
+
     let isFavorite = false;
     for(let favorite of this.state.favorites){
       if(favorite.uuid === this.state.video.uuid){
@@ -115,7 +113,7 @@ export default class VideoDetails extends Component {
       host_id: this.state.video.host_id,
       start_time: this.state.video.start_time,
       time_start: time_start,
-      speaker: 'speaker',
+      speaker: "speaker",
       identifier: identifier,
       text: text,
       owner_id: this.state.video.owner_id,
@@ -128,10 +126,10 @@ export default class VideoDetails extends Component {
     const newTime = Math.floor(e.target.className);
     await this.player.seekTo(newTime);
     this.setState({
-      timeStamp: newTime
-    })
+      timeStamp: newTime,
+    });
 
-    console.log(this.state.timeStamp)
+    console.log(this.state.timeStamp);
   };
 
   handleSearch = (e) => {
@@ -153,7 +151,6 @@ export default class VideoDetails extends Component {
     this.setState({
       fuzzy: fuzzysearch,
     });
-
   };
 
   render() {
@@ -172,74 +169,74 @@ export default class VideoDetails extends Component {
         {loading ? (
           <img src={"/loading-spinner.gif"} alt={""} className="spinner" />
         ) : (
-            <div>
-              <h3 className="video-header">{video.topic}</h3>
-              <div className="detail-search">
-                <form onSubmit={this.handleSearch}>
-                  <input
-                    onChange={(e) => this.setState({ search: e.target.value })}
-                    type="text"
-                    className="detail-searchbar"
+          <div>
+            <h3 className="video-header">{video.topic}</h3>
+            <div className="detail-search">
+              <form onSubmit={this.handleSearch}>
+                <input
+                  onChange={(e) => this.setState({ search: e.target.value })}
+                  type="text"
+                  className="detail-searchbar"
+                />
+                <button className="detail-search-button">Search</button>
+              </form>
+            </div>
+
+            <div className="video-detail">
+              <div className="video">
+                <div>
+                  <ReactPlayer
+                    ref={this.ref}
+                    url={this.state.video.video_play_url}
+                    controls
                   />
-                  <button className="detail-search-button">Search</button>
-                </form>
+                </div>
+                <div className="chat-shell">
+                  <h4 className="chat-title">Chat</h4>
+                  <div className="chat">
+                    {chats.map((chat) => (
+                      <div key={chat.id}>
+                        {chat.timestamp} {chat.speaker} {chat.text}
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
 
-              <div className="video-detail">
-                <div className="video">
-                  <div>
-                    <ReactPlayer
-                      ref={this.ref}
-                      url={this.state.video.video_play_url}
-                      controls
-                    />
-                  </div>
-                  <div className="chat-shell">
-                    <h4 className="chat-title">Chat</h4>
-                    <div className="chat">
-                      {chats.map((chat) => (
-                        <div key={chat.id}>
-                          {chat.timestamp} {chat.speaker} {chat.text}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-
-                <div className="buttons">
-                  <button
-                    onClick={this.handleFavorite}
-                    className="favorite-button"
-                  >
-                    Favorite
+              <div className="buttons">
+                <button
+                  onClick={this.handleFavorite}
+                  className="favorite-button"
+                >
+                  Favorite
                 </button>
-                </div>
-                <div className="transcript-shell">
-                  <h5 className="bookmark-timestamp">Bookmark Timestamp</h5>
-                  <h4 className="transcript-header">Transcript</h4>
-                  <div className="transcript">
-                    {!isSearching &&
-                      transcript.map((script) =>
-                        seedTranscript(
-                          script,
-                          this.handleTimeStamp,
-                          this.handleBookmark
-                        )
-                      )}
-                    {isSearching &&
-                      transcript.map((script) =>
-                        transcriptRender(
-                          fuzzySet,
-                          script,
-                          this.handleTimeStamp,
-                          this.handleBookmark
-                        )
-                      )}
-                  </div>
+              </div>
+              <div className="transcript-shell">
+                <h5 className="bookmark-timestamp">Bookmark Timestamp</h5>
+                <h4 className="transcript-header">Transcript</h4>
+                <div className="transcript">
+                  {!isSearching &&
+                    transcript.map((script) =>
+                      seedTranscript(
+                        script,
+                        this.handleTimeStamp,
+                        this.handleBookmark
+                      )
+                    )}
+                  {isSearching &&
+                    transcript.map((script) =>
+                      transcriptRender(
+                        fuzzySet,
+                        script,
+                        this.handleTimeStamp,
+                        this.handleBookmark
+                      )
+                    )}
                 </div>
               </div>
             </div>
-          )}
+          </div>
+        )}
       </div>
     );
   }
@@ -260,9 +257,15 @@ const seedTranscript = (script, handleTimeStamp, handleBookmark) => (
         )
       }
     >
-      {script.time_start.toFixed(1)}
+      {timeConversion(script.time_start)}
     </button>
-    <div onClick={handleTimeStamp} className={script.time_start} key={script.id}> {script.text}{" "}
+    <div
+      onClick={handleTimeStamp}
+      className={script.time_start}
+      key={script.id}
+    >
+      {" "}
+      {script.text}{" "}
     </div>
   </div>
 );
@@ -294,9 +297,13 @@ const searchHighlight = (script, handleTimeStamp, handleBookmark) => (
         )
       }
     >
-      {script.time_start.toFixed(1)}
+      {timeConversion(script.time_start)}
     </button>
-    <div onClick={handleTimeStamp} className={script.time_start} key={script.id}>
+    <div
+      onClick={handleTimeStamp}
+      className={script.time_start}
+      key={script.id}
+    >
       {script.text}
     </div>
   </div>
@@ -306,6 +313,10 @@ const searchTranscript = (script, handleTimeStamp, handleBookmark) => (
   <div
     onClick={handleTimeStamp}
     className={script.time_start}
-    key={script.time_start}
+    key={script.id}
   ></div>
 );
+
+const timeConversion = (timestamp) => {
+  return `${new Date(timestamp * 1000).toISOString().substr(11, 8)}`;
+};
