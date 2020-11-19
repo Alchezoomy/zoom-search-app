@@ -6,7 +6,8 @@ import {
     fetchVideo,
     favoriteVideo,
     fetchTranscript,
-    fetchChat
+    fetchChat,
+    bookmarkVideo
 
 } from './Fetches.js';
 
@@ -18,7 +19,7 @@ export default class VideoDetails extends Component {
         search: '',
         transcript: [],
         chats: [],
-        timeStamp: 200
+        timeStamp: 1
     }
 
     componentDidMount = async () => {
@@ -35,6 +36,8 @@ export default class VideoDetails extends Component {
             chats: chats,
             loading: false
         })
+        console.log(transcript)
+
     }
 
 
@@ -55,10 +58,32 @@ export default class VideoDetails extends Component {
         await favoriteVideo(newFavorite, this.props.token);
 
     }
+    handleBookmark = async (identifier, text, time_start, speaker, id) => {
+
+        const newBookmark = {
+            id: id,
+            uuid: this.state.video.uuid,
+
+            topic: this.state.video.topic,
+            host_id: this.state.video.host_id,
+            start_time: this.state.video.start_time,
+            time_start: time_start,
+            speaker: speaker,
+            identifier: identifier,
+            text: text,
+            owner_id: this.state.video.owner_id
+
+
+        }
+        console.log(newBookmark)
+
+        await bookmarkVideo(newBookmark, this.props.token);
+
+    }
     handleTimeStamp = async (e) => {
 
         await this.setState({
-            timeStamp: e.target.className
+            timeStamp: Number(e.target.className)
         })
         console.log(this.state.timeStamp)
 
@@ -102,7 +127,7 @@ export default class VideoDetails extends Component {
                                 </div>
 
                                 <div className='transcript'>{this.state.transcript.map(trans =>
-                                    <div onClick={this.handleTimeStamp} className={trans.time_start} key={trans.time_start}>({trans.time_start}) {trans.text}</div>
+                                    <div onClick={this.handleTimeStamp} className={trans.time_start} key={trans.time_start}><button onClick={() => this.handleBookmark(trans.identifier, trans.text, trans.time_start, trans.speaker, trans.id)}>Bookmark</button>({trans.time_start}) {trans.text}</div>
                                 )}
 
                                 </div>
