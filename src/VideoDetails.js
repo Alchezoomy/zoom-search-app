@@ -54,7 +54,7 @@ export default class VideoDetails extends Component {
           e.target.style.backgroundColor = '#747487';
           e.target.style.color = 'white';
       }
-  }
+  };
 
   handleFavorite = async (e) => {
     const newFavorite = {
@@ -138,40 +138,16 @@ export default class VideoDetails extends Component {
         ({script.time_start}) {script.text}{" "}
       </div>
     );
-    
-    const transcriptRender = (fuzzySet, script, handleTimeStamp) => {
-  if (fuzzySet.has(script.text)) {
-    return searchHighlight(script, handleTimeStamp);
-  } else {
-    return searchTranscript(script, handleTimeStamp);
-  }
-};
-
-const searchHighlight = (script, handleTimeStamp) => (
-  <div 
-                  onClick={this.handleTimeStamp} className={trans.time_start} 
-                  key={trans.time_start}>
-                    <button className='bookmark-button' onClick={() => 
-                    this.handleBookmark(trans.identifier, trans.text, trans.time_start, trans.speaker, trans.id)}>
-                      {trans.time_start.toFixed(1)}</button>{trans.text}</div>
-                      )}
-);
-
-const searchTranscript = (script, handleTimeStamp) => (
-  <div
-    onClick={handleTimeStamp}
-    className={script.time_start}
-    key={script.time_start}
-  ></div>
-);
 
     return (
       <div className="video-details">
+
         <div className="left-nav">
           <DashMenu />
         </div>
 
-        {loading ? (
+        {
+        loading ? (
           <img src={"/loading-spinner.gif"} alt={""} className="spinner" />
         ) : (
           <div>
@@ -186,6 +162,7 @@ const searchTranscript = (script, handleTimeStamp) => (
                 <button className="detail-search-button">Search</button>
               </form>
             </div>
+
             <div className="video-detail">
               <div className="video">
                 <Player
@@ -194,42 +171,66 @@ const searchTranscript = (script, handleTimeStamp) => (
                 />
                 <div className='chat-shell'>
                   <h4 className='chat-title'>Chat</h4>
-                <div className="chat">
-                  {chats.map((chat) => (
-                    <div>
-                      {chat.timestamp} {chat.speaker} {chat.text}
-                    </div>
-                  ))}
-                </div>
+                  <div className="chat">
+                    {chats.map((chat) => (
+                      <div>
+                        {chat.timestamp} {chat.speaker} {chat.text}
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
 
               <div className="buttons">
                 <button
                   onClick={this.handleFavorite}
-                  className="favorite-button"
-                >
+                  className="favorite-button">
                   Favorite
                 </button>
               </div>
 
-
-<div className='transcript-shell'>
+              <div className='transcript-shell'>
                 <h5 className='bookmark-timestamp'>Bookmark Timestamp</h5>
-                <h4 className='transcript-header'>Transcript
-                </h4>
-              <div className="transcript">
-                {!isSearching &&
-                  transcript.map((script) => seedTranscript(script))}
-                {isSearching &&
-                  transcript.map((script) =>
-                    transcriptRender(fuzzySet, script, this.handleTimeStamp)
-                  )}
+                <h4 className='transcript-header'>Transcript</h4>
+                <div className="transcript">
+                  {!isSearching &&
+                    transcript.map((script) => seedTranscript(script))}
+                  {isSearching &&
+                    transcript.map((script) =>
+                      transcriptRender(fuzzySet, script, this.handleTimeStamp)
+                    )}
+                </div>
               </div>
-            </div>
           </div>
-        )}
+        </div>
+        )
+        }
       </div>
-    );
+    )
   }
 }
+
+// const transcriptRender = (fuzzySet, script, handleTimeStamp) => {
+//   if (fuzzySet.has(script.text)) {
+//     return searchHighlight(script, handleTimeStamp);
+//   } else {
+//     return searchTranscript(script, handleTimeStamp);
+//   }
+// };
+
+// const searchHighlight = (script, handleTimeStamp) => (
+//   <div onClick={this.handleTimeStamp} 
+//     className={trans.time_start} 
+//     key={trans.time_start}>
+//     <button className='bookmark-button' onClick={ () => 
+//       this.handleBookmark(trans.identifier, trans.text, trans.time_start, trans.speaker, trans.id)}>
+//       {trans.time_start.toFixed(1)}</button>{trans.text}</div>
+// );
+
+// const searchTranscript = (script, handleTimeStamp) => (
+//   <div
+//     onClick={handleTimeStamp}
+//     className={script.time_start}
+//     key={script.time_start}
+//   ></div>
+// );
