@@ -8,7 +8,7 @@ import {
   favoriteVideo,
   fetchTranscript,
   fetchChat,
-  bookmarkVideo
+  bookmarkVideo,
 } from "./Fetches.js";
 
 export default class VideoDetails extends Component {
@@ -114,7 +114,6 @@ export default class VideoDetails extends Component {
 
     const fuse = new Fuse(transcript, options);
     const fuzzysearch = fuse.search(search);
-    console.log("fuzzysearch: ", fuzzysearch);
 
     this.setState({
       fuzzy: fuzzysearch,
@@ -125,6 +124,47 @@ export default class VideoDetails extends Component {
 
   render() {
     const { transcript, chats, video, loading, fuzzy, timeStamp } = this.state;
+
+    const isSearching = fuzzy.length > 0;
+
+    const fuzzySet = new Set(fuzzy.map((match) => match.item.text));
+
+    const seedTranscript = (script) => (
+      <div
+        onClick={this.handleTimeStamp}
+        className={script.time_start}
+        key={script.time_start}
+      >
+        ({script.time_start}) {script.text}{" "}
+      </div>
+    );
+    
+    const transcriptRender = (fuzzySet, script, handleTimeStamp) => {
+  if (fuzzySet.has(script.text)) {
+    return searchHighlight(script, handleTimeStamp);
+  } else {
+    return searchTranscript(script, handleTimeStamp);
+  }
+};
+
+const searchHighlight = (script, handleTimeStamp) => (
+  <div 
+                  onClick={this.handleTimeStamp} className={trans.time_start} 
+                  key={trans.time_start}>
+                    <button className='bookmark-button' onClick={() => 
+                    this.handleBookmark(trans.identifier, trans.text, trans.time_start, trans.speaker, trans.id)}>
+                      {trans.time_start.toFixed(1)}</button>{trans.text}</div>
+                      )}
+);
+
+const searchTranscript = (script, handleTimeStamp) => (
+  <div
+    onClick={handleTimeStamp}
+    className={script.time_start}
+    key={script.time_start}
+  ></div>
+);
+
     return (
       <div className="video-details">
         <div className="left-nav">
@@ -173,19 +213,18 @@ export default class VideoDetails extends Component {
                 </button>
               </div>
 
-              <div className='transcript-shell'>
+
+<div className='transcript-shell'>
                 <h5 className='bookmark-timestamp'>Bookmark Timestamp</h5>
                 <h4 className='transcript-header'>Transcript
                 </h4>
-                <div className='transcript'>{this.state.transcript.map(trans =>
-                  <div 
-                  onClick={this.handleTimeStamp} className={trans.time_start} 
-                  key={trans.time_start}>
-                    <button className='bookmark-button' onClick={() => 
-                    this.handleBookmark(trans.identifier, trans.text, trans.time_start, trans.speaker, trans.id)}>
-                      {trans.time_start.toFixed(1)}</button>{trans.text}</div>
-                      )}
-              </div>
+              <div className="transcript">
+                {!isSearching &&
+                  transcript.map((script) => seedTranscript(script))}
+                {isSearching &&
+                  transcript.map((script) =>
+                    transcriptRender(fuzzySet, script, this.handleTimeStamp)
+                  )}
               </div>
             </div>
           </div>
