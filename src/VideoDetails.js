@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./App.css";
 import DashMenu from "./DashMenu.js";
-import Player from "./Player.js";
+import ReactPlayer from 'react-player';
 import Fuse from "fuse.js";
 import {
   fetchVideo,
@@ -23,12 +23,19 @@ export default class VideoDetails extends Component {
     favorited: "",
   };
 
+  ref = player => {
+    this.player = player
+  }
+
   componentDidMount = async () => {
     await this.setState({ loading: true });
+
     const video = await fetchVideo(
       this.props.match.params.id,
       this.props.token
     );
+
+    // await this.player.seekTo(this.state.timeStamp);
 
     const transcript = await fetchTranscript(
       this.props.match.params.id,
@@ -93,10 +100,13 @@ export default class VideoDetails extends Component {
   };
 
   handleTimeStamp = async (e) => {
-    await this.setState({
-      timeStamp: e.target.className,
-    });
-    console.log(this.state.timeStamp);
+    const newTime = Math.floor(e.target.className);
+        await this.player.seekTo(newTime);
+        this.setState({
+            timeStamp: newTime
+        })
+
+      console.log(this.state.timeStamp)
   };
 
   handleSearch = (e) => {
@@ -119,11 +129,10 @@ export default class VideoDetails extends Component {
       fuzzy: fuzzysearch,
     });
 
-    console.log("search: ", search);
   };
 
   render() {
-    const { transcript, chats, video, loading, fuzzy, timeStamp } = this.state;
+    const { transcript, chats, video, loading, fuzzy } = this.state;
 
     const isSearching = fuzzy.length > 0;
 
@@ -153,10 +162,13 @@ export default class VideoDetails extends Component {
 
               <div className="video-detail">
                 <div className="video">
-                  <Player
-                    timeStamp={timeStamp}
-                    video_url={video.video_play_url}
-                  />
+                  <div>
+                    <ReactPlayer
+                      ref={this.ref}
+                      url={this.state.video.video_play_url}
+                      controls
+                      />
+                  </div>
                   <div className="chat-shell">
                     <h4 className="chat-title">Chat</h4>
                     <div className="chat">
@@ -225,7 +237,7 @@ const seedTranscript = (script, handleTimeStamp, handleBookmark) => (
     >
       {script.time_start.toFixed(1)}
     </button>
-    ({script.time_start}) {script.text}{" "}
+    {script.text}{" "}
   </div>
 );
 
@@ -243,7 +255,7 @@ const transcriptRender = (
 };
 
 const searchHighlight = (script, handleTimeStamp, handleBookmark) => (
-  <div onClick={handleTimeStamp} className={script.time_start} key={script.id}>
+  <div>
     <button
       className="bookmark-button"
       onClick={() =>
@@ -258,7 +270,9 @@ const searchHighlight = (script, handleTimeStamp, handleBookmark) => (
     >
       {script.time_start.toFixed(1)}
     </button>
+  <div onClick={handleTimeStamp} className={script.time_start} key={script.id}>
     {script.text}
+  </div>
   </div>
 );
 
