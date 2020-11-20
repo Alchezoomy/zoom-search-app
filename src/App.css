@@ -270,7 +270,6 @@ input {
 }
 
 .video-item:hover {
-  background-color: #2D8CFF;
   color: white;
   transition-duration: 1s;
 }
@@ -469,4 +468,128 @@ input {
   margin-top: 10px;
   border-radius: 50%;
   height: 50px;
+}
+
+.about-us {
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+  margin-top: -10%;
+  background-color: black;
+}
+
+.dee {
+  position: fixed;
+  width: 260px;
+  margin-top: 260px;
+  margin-left: 51px;
+  z-index: 1;
+}
+
+.evan {
+  position: fixed;
+  width: 260px;
+  margin-top: 260px;
+  margin-left: 315px;
+  z-index: 1;
+}
+
+.paul {
+  position: fixed;
+  width: 260px;
+  margin-top: 260px;
+  margin-left: 579px;
+  z-index: 1;
+}
+
+.jillian {
+  position: fixed;
+  width: 260px;
+  margin-top: 415px;
+  margin-left: 181px;
+  z-index: 1;
+}
+
+.sjaan {
+  position: fixed;
+  width: 260px;
+  margin-top: 415px;
+  margin-left: 445px;
+  z-index: 1;
+}
+
+.dee:hover, .evan:hover, .paul:hover, .jillian:hover, .sjaan:hover {
+  border: solid 2px yellow;
+}
+
+.chat-shell {
+  float: right;
+  background-color: #232333;
+  color: white;
+  float: right;
+  height: 150%;
+  width: 300px;
+  font-family: LatoRegular;
+  font-size: 11pt;
+  border: solid 1px #414155;
+  overflow-y: scroll;
+}
+
+.about-us-chat {
+  position: relative;
+  margin-top: 500px;
+  margin-left: 125px;
+}
+
+.dee-bio {
+  position: relative;
+  margin-top: 30px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.about-us-label {
+  position: relative;
+  margin-top: 20px;
+  color: #747487;
+}
+
+.about-us-name {
+  color: #2D8CFF;
+}
+
+.about-us-bio {
+  position: relative;
+  margin-top: 10px;
+}
+
+.link-text {
+  color: #2D8CFF;
+}
+
+.link-text:hover, .back:hover {
+  cursor: crosshair;
+}
+
+.evan-bio, .paul-bio, .jillian-bio, .sjaan-bio {
+  position: relative;
+  margin-top: 30px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.sjaan-bio {
+  margin-bottom: 150px;
+}
+
+.left-nav-about-us {
+  position: fixed;
+  margin-top: 100px;
+}
+
+.back {
+  position: fixed;
+  color: white;
+  margin-top: 500px;
+  margin-left: 25px;
 }
