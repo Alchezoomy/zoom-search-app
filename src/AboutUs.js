@@ -16,7 +16,7 @@ export default class AboutUs extends Component {
 
         <img className='sjaan' src='/sjaan-aboutus.gif' alt='Sjaan Hydrick' />
 
-      <div className='chat-shell'>
+      <div className='about-us-chat-shell'>
       <Link to='/student'>
           <p className='back'>Back</p>
         </Link>
