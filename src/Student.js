@@ -64,7 +64,6 @@ export default class Student extends Component {
                             this.state.allVideos.map(video =>
                                 <div key={`${video.uuid}${Math.random()}`} >
                                     <VideoList
-                                        id={video.id}
                                         video={video} />
                                 </div>
                             )

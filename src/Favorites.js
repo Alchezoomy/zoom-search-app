@@ -33,13 +33,13 @@ export default class Favorites extends Component {
     render() {
         return (
 
-            <div className ='favorites'>
+            <div className='favorites'>
                 <div className='left-nav'>
                     <DashMenu
                     />
                 </div>
 
-            <h3 className='dashboard'>Favorites Dashboard</h3>
+                <h3 className='dashboard'>Favorites Dashboard</h3>
 
                 <div className='video-box'>
                     {
@@ -49,14 +49,14 @@ export default class Favorites extends Component {
                             this.state.favorites.map(video =>
                                 <div key={`${video.uuid}${Math.random()}`} >
                                     <FavoriteList
-                                    token={this.props.token}
-                                    video={video}
-                                    handleDelete={this.handleDelete} />
+                                        token={this.props.token}
+                                        video={video}
+                                        handleDelete={this.handleDelete} />
                                 </div>
-                                )
+                            )
                     }
-                    </div>
                 </div>
+            </div>
         )
     }
 }
