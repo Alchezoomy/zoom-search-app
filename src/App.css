@@ -251,7 +251,7 @@ input {
   font-family: LatoRegular;
   border: solid 2px #747487;
   padding-bottom: 2%;
-  color: #2D8CFF;
+  color: black;
 }
 
 .meeting-link {
@@ -463,4 +463,10 @@ input {
 
 .footer-text {
   padding: .5em;
+}
+
+.profile-pic {
+  margin-top: 10px;
+  border-radius: 50%;
+  height: 50px;
 }
