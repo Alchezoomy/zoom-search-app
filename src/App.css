@@ -537,7 +537,7 @@ input {
 
 .about-us-chat {
   position: relative;
-  margin-top: 500px;
+  margin-top: -33px;
   margin-left: 125px;
 }
 
@@ -588,8 +588,8 @@ input {
 }
 
 .back {
-  position: fixed;
+  position: relative;
   color: white;
-  margin-top: 500px;
+  margin-top: 150px;
   margin-left: 25px;
 }
