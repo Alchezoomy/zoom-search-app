@@ -31,9 +31,9 @@ export default class VideoDetails extends Component {
   componentDidMount = async () => {
     await this.setState({ loading: true });
 
-    const favorites = await fetchFavorites(
-      this.props.token
-    );
+    // const favorites = await fetchFavorites(
+    //   this.props.token
+    // );
 
     const video = await fetchVideo(
       this.props.match.params.id,
@@ -52,36 +52,36 @@ export default class VideoDetails extends Component {
       transcript: transcript,
       chats: chats,
       loading: false,
-      favorites: favorites
+      // favorites: favorites
     });
 
-    this.determineFavorite();
+    // this.determineFavorite();
 
     this.player.seekTo(this.state.timeStamp);
   };
 
-  handleFavoriteButton = async (e) => {
-    if (!this.state.favorited === true) {
-      e.target.style.backgroundColor = "white";
-      e.target.style.color = "#2D8CFF";
-    } else if (this.state.favorited === true) {
-      e.target.style.backgroundColor = "#747487";
-      e.target.style.color = "white";
-    }
-  };
+  // handleFavoriteButton = async (e) => {
+  //   if (!this.state.favorited === true) {
+  //     e.target.style.backgroundColor = "white";
+  //     e.target.style.color = "#2D8CFF";
+  //   } else if (this.state.favorited === true) {
+  //     e.target.style.backgroundColor = "#747487";
+  //     e.target.style.color = "white";
+  //   }
+  // };
 
-  determineFavorite = async (e) => {
-    let isFavorite = false;
-    for(let favorite of this.state.favorites){
-      if(favorite.uuid === this.state.video.uuid){
-        isFavorite = true;
-      }
-    }
+  // determineFavorite = async (e) => {
+  //   let isFavorite = false;
+  //   for(let favorite of this.state.favorites){
+  //     if(favorite.uuid === this.state.video.uuid){
+  //       isFavorite = true;
+  //     }
+  //   }
 
-    this.setState({
-      favorited: isFavorite
-    })
-  };
+  //   this.setState({
+  //     favorited: isFavorite
+  //   })
+  // };
 
   handleFavorite = async (e) => {
     const newFavorite = {
@@ -126,8 +126,6 @@ export default class VideoDetails extends Component {
     this.setState({
       timeStamp: newTime,
     });
-
-    console.log(this.state.timeStamp);
   };
 
   handleSearch = (e) => {

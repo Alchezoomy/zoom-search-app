@@ -11,8 +11,6 @@ export default class SignUp extends Component {
     handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log(this.state);
-
         this.setState({ loading: true })
         const user = await request
             .post('https://alchezoomy.herokuapp.com/auth/signup')
