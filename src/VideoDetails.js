@@ -9,7 +9,7 @@ import {
   fetchTranscript,
   fetchChat,
   bookmarkVideo,
-  fetchFavorites,
+  // fetchFavorites,
 } from "./Fetches.js";
 
 export default class VideoDetails extends Component {
