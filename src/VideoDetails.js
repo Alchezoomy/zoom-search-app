@@ -100,7 +100,7 @@ export default class VideoDetails extends Component {
     })
 
     this.handleFavoriteButton(e);
-    
+
   };
 
   handleBookmark = async (identifier, text, time_start, speaker, id) => {
@@ -165,75 +165,75 @@ export default class VideoDetails extends Component {
         {loading ? (
           <img src={"/loading-spinner.gif"} alt={""} className="spinner" />
         ) : (
-          <div>
-            <h3 className="video-header">{video.topic}</h3>
+            <div>
+              <h3 className="video-header">{video.topic}</h3>
 
-            <div className="video-detail">
-              <div className="video">
-                <div>
-                  <ReactPlayer
-                    ref={this.ref}
-                    url={this.state.video.video_play_url}
-                    controls
-                  />
+              <div className="video-detail">
+                <div className="video">
+                  <div>
+                    <ReactPlayer
+                      ref={this.ref}
+                      url={this.state.video.video_play_url}
+                      controls
+                    />
+                  </div>
+                  <div className="chat-shell">
+                    <h4 className="chat-title">Chat</h4>
+                    <div className="chat">
+                      {chats.map((chat) => (
+                        <div key={chat.id}>
+                          {chat.timestamp} {chat.speaker} {chat.text}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
-                <div className="chat-shell">
-                  <h4 className="chat-title">Chat</h4>
-                  <div className="chat">
-                    {chats.map((chat) => (
-                      <div key={chat.id}>
-                        {chat.timestamp} {chat.speaker} {chat.text}
-                      </div>
-                    ))}
+
+                <div className="buttons">
+                  <button
+                    onClick={this.handleFavorite}
+                    className="favorite-button"
+                  >
+                    Favorite
+                </button>
+                </div>
+                <div className="transcript-shell">
+                  <h5 className="bookmark-timestamp">Bookmark Timestamp</h5>
+                  <h4 className="transcript-header">Transcript</h4>
+                  <div className="transcript">
+                    {!isSearching &&
+                      transcript.map((script) =>
+                        seedTranscript(
+                          script,
+                          this.handleTimeStamp,
+                          this.handleBookmark
+                        )
+                      )}
+                    {isSearching &&
+                      transcript.map((script) =>
+                        transcriptRender(
+                          fuzzySet,
+                          script,
+                          this.handleTimeStamp,
+                          this.handleBookmark
+                        )
+                      )}
+                  </div>
+
+                  <div className="detail-search">
+                    <form onSubmit={this.handleSearch}>
+                      <input
+                        onChange={(e) => this.setState({ search: e.target.value })}
+                        type="text"
+                        className="detail-searchbar"
+                      />
+                      <button className="detail-search-button">Search</button>
+                    </form>
                   </div>
                 </div>
               </div>
-
-              <div className="buttons">
-                <button
-                  onClick={this.handleFavorite}
-                  className="favorite-button"
-                >
-                  Favorite
-                </button>
-              </div>
-              <div className="transcript-shell">
-                <h5 className="bookmark-timestamp">Bookmark Timestamp</h5>
-                <h4 className="transcript-header">Transcript</h4>
-                <div className="transcript">
-                  {!isSearching &&
-                    transcript.map((script) =>
-                      seedTranscript(
-                        script,
-                        this.handleTimeStamp,
-                        this.handleBookmark
-                      )
-                    )}
-                  {isSearching &&
-                    transcript.map((script) =>
-                      transcriptRender(
-                        fuzzySet,
-                        script,
-                        this.handleTimeStamp,
-                        this.handleBookmark
-                      )
-                    )}
-                </div>
-
-                <div className="detail-search">
-                  <form onSubmit={this.handleSearch}>
-                    <input
-                      onChange={(e) => this.setState({ search: e.target.value })}
-                      type="text"
-                      className="detail-searchbar"
-                    />
-                    <button className="detail-search-button">Search</button>
-                  </form>
-                </div>
-              </div>
             </div>
-          </div>
-        )}
+          )}
       </div>
     );
   }
