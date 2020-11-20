@@ -22,6 +22,14 @@ html, body {
   min-height: 100%;
 }
 
+a {
+  text-decoration: none;
+}
+
+.header-shell {
+  height: 150px;
+}
+
 .header {
   position: fixed;
   width: 100%;
@@ -30,10 +38,6 @@ html, body {
   background-color: #2D8CFF;
   text-align: center;
   z-index: 1;
-}
-
-.header-shell {
-  height: 150px;
 }
 
 .alchezoomy {
@@ -49,7 +53,6 @@ html, body {
 }
 
 .landing {
-
   font-family: LatoRegular;
   text-align: center;
   color: #232333;
@@ -135,6 +138,7 @@ input {
 
 .sign-up {
   margin-top: 12%;
+  margin-bottom: 100px;
   color: #232333;
 }
 
@@ -206,7 +210,7 @@ input {
   font-size: 3.5vw;
 }
 
-.search-and-sort {
+.main-search {
   position: absolute;
   margin-top: -6%;
   text-align: right;
@@ -223,21 +227,6 @@ input {
   width: 25%;
   line-height: 1em;
   font-size: 2vw;
-  background-color: white;
-  color: #2D8CFF;
-  border: solid 1px #2D8CFF;
-  border-radius: 5px;
-}
-
-.highlight-me {
-  background-color: rgba(246, 246, 84, 0.7);
-  border: 1px solid grey;
-  margin: 3px;
-}
-
-.sort {
-  margin-top: 2%;
-  font-size: 1.4vw;
   background-color: white;
   color: #2D8CFF;
   border: solid 1px #2D8CFF;
@@ -280,10 +269,6 @@ input {
   padding-right: 1%;
 }
 
-a {
-  text-decoration: none;
-}
-
 .video-item:hover {
   background-color: #2D8CFF;
   color: white;
@@ -314,9 +299,8 @@ a {
 }
 
 .video-header {
-  position: absolute;
+  position: relative;
   font-family: LatoBold;
-  margin-top: 0%;
   margin-left: 17%;
   font-size: 110%;
   z-index: -1;
@@ -324,7 +308,8 @@ a {
 
 .detail-search {
   position: relative;
-  margin-left: 900px;
+  margin-left: 700px;
+  margin-top: -280px;
 }
 
 .detail-searchbar {
@@ -364,7 +349,7 @@ a {
 
 .chat {
   display: fixed;
-  height: 590px;
+  height: 325px;
   padding: 1%;
   border: solid 1px #2D8CFF;
   border-radius: 5px;

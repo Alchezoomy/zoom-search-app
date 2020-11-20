@@ -50,17 +50,11 @@ export default class Student extends Component {
                     <DashMenu />
                 </div>
                 <h3 className='dashboard'>Student Dashboard</h3>
-                <div className='search-and-sort'>
+                <div className='main-search'>
                     <form onSubmit={this.handleSearch}>
                         <input onChange={e => this.setState({ search: e.target.value })} type="text" className='searchbar' />
                         <button className='search'>Search</button>
                     </form>
-                    <select className='sort'>
-                        <option value='none'>Sort Videos By...</option>
-                        <option>Date</option>
-                        <option>Host</option>
-                        <option>Favorites</option>
-                    </select>
                 </div>
                 <div className='video-box'>
                     {

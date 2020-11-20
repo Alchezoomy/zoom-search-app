@@ -71,14 +71,12 @@ export default class VideoDetails extends Component {
   };
 
   determineFavorite = async (e) => {
-
     let isFavorite = false;
     for(let favorite of this.state.favorites){
       if(favorite.uuid === this.state.video.uuid){
         isFavorite = true;
       }
     }
-    console.log(isFavorite)
 
     this.setState({
       favorited: isFavorite
@@ -171,16 +169,6 @@ export default class VideoDetails extends Component {
         ) : (
           <div>
             <h3 className="video-header">{video.topic}</h3>
-            <div className="detail-search">
-              <form onSubmit={this.handleSearch}>
-                <input
-                  onChange={(e) => this.setState({ search: e.target.value })}
-                  type="text"
-                  className="detail-searchbar"
-                />
-                <button className="detail-search-button">Search</button>
-              </form>
-            </div>
 
             <div className="video-detail">
               <div className="video">
@@ -232,6 +220,17 @@ export default class VideoDetails extends Component {
                         this.handleBookmark
                       )
                     )}
+                </div>
+
+                <div className="detail-search">
+                  <form onSubmit={this.handleSearch}>
+                    <input
+                      onChange={(e) => this.setState({ search: e.target.value })}
+                      type="text"
+                      className="detail-searchbar"
+                    />
+                    <button className="detail-search-button">Search</button>
+                  </form>
                 </div>
               </div>
             </div>
