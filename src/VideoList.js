@@ -6,10 +6,10 @@ export default class VideoList extends Component {
     render() {
         return (
             <div className='video-list'>
-                <Link className='meeting-link' to={`/meeting/${this.props.video.uuid}`}>
+                <Link className='meeting-link' to={`/meeting/${this.props.video.id}`}>
                     <VideoItem
-                    topic={this.props.video.topic}
-                    start_time={this.props.video.start_time} 
+                        topic={this.props.video.topic}
+                        start_time={this.props.video.start_time}
                     />
                 </Link>
             </div>

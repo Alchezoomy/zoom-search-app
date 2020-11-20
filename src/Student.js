@@ -70,15 +70,16 @@ export default class Student extends Component {
                 </div>
                 <div className='video-box'>
                     {
-                    this.state.loading
-                        ? <img src={'/loading-spinner.gif'} alt={''} />
-                        :
-                        this.state.allVideos.map(video =>
-                            <div key={`${video.uuid}${Math.random()}`} >
-                                <VideoList
-                                    video={video} />
-                            </div>
-                        )
+                        this.state.loading
+                            ? <img src={'/loading-spinner.gif'} alt={''} />
+                            :
+                            this.state.allVideos.map(video =>
+                                <div key={`${video.uuid}${Math.random()}`} >
+                                    <VideoList
+                                        video={video}
+                                        id={video.id} />
+                                </div>
+                            )
                     }
                 </div>
             </div>

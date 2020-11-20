@@ -187,7 +187,7 @@ export default class VideoDetails extends Component {
                     <h4 className="chat-title">Chat</h4>
                     <div className="chat">
                       {chats.map((chat) => (
-                        <div key={chat.id}>
+                        <div onClick={this.handleTimeStamp} className={chat.timeStamp} key={chat.id}>
                           {chat.timestamp} {chat.speaker} {chat.text}
                         </div>
                       ))}
