@@ -12,8 +12,6 @@ export default class LandingPage extends Component {
     handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log(this.state);
-
         this.setState({ loading: true })
         const user = await request
             .post('https://alchezoomy.herokuapp.com/auth/signin')
