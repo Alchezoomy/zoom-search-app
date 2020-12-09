@@ -1,5 +1,6 @@
 import request from "superagent";
 
+// very nice! happy to see these fetches abstracted out into their own file instead of clogging out your components
 const URL = "https://alchezoomy.herokuapp.com/";
 
 export async function fetchFavorites(token) {

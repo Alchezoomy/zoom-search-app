@@ -20,6 +20,7 @@ export default class VideoItem extends Component {
   }
 }
 
+// nice util! might want this in a separate file
 function convertDate(datestring) {
   return `${new Date(datestring).toDateString()} ${new Date(
     datestring

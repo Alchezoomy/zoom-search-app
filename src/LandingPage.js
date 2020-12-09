@@ -13,6 +13,7 @@ export default class LandingPage extends Component {
         e.preventDefault();
 
         this.setState({ loading: true })
+        // seems like this should be abstracted into your fetches.js file, for consistency
         const user = await request
             .post('https://alchezoomy.herokuapp.com/auth/signin')
             .send(this.state);
@@ -20,27 +21,38 @@ export default class LandingPage extends Component {
         this.setState({ loading: false })
 
         this.props.changeTokenAndUsername(user.body.email, user.body.token);
-
-        ;
     }
 
     render() {
         return (
             <div className='landing'>
-                <h1 className='landing-tagline'>Never miss a beat.</h1>
-                <h2 className='landing-description'>Search uploaded Zoom videos and chat logs for easy reference.</h2>
+                <h1 className='landing-tagline'>
+                    Never miss a beat.
+                </h1>
+                <h2 className='landing-description'>
+                    Search uploaded Zoom videos and chat logs for easy reference.
+                </h2>
                 <div className='box'>
                     <form onSubmit={this.handleSubmit}>
                         <h2 className='student-login'>Student Login</h2>
                         <p className='email'>E-mail:</p>
-                        <input onChange={(e) => this.setState({ email: e.target.value })}
-                            value={this.state.email}></input>
+                        <input 
+                            onChange={(e) => this.setState({ email: e.target.value })}
+                            value={this.state.email} />
                         <p className='password'>Password:</p>
-                        <input onChange={(e) => this.setState({ password: e.target.value })}
-                            value={this.state.password} type="password" />
-                        <br /><button className='login-button'>Submit</button>
+                        <input 
+                            onChange={(e) => this.setState({ password: e.target.value })}
+                            value={this.state.password} 
+                            type="password" />
+                        {/* i would prefer to see buttons get display:block, rather than clog your html with <br />s */}
                         <br />
-                        <p className='sign-up'>Not a user? <Link to='/signup' className='link'>Sign up here</Link>.</p>
+                        <button className='login-button'>
+                            Submit
+                        </button>
+                        <br />
+                        <p className='sign-up'>
+                            Not a user? <Link to='/signup' className='link'>Sign up here</Link>.
+                        </p>
                     </form>
                 </div>
             </div>

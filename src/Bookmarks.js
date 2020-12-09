@@ -34,8 +34,7 @@ export default class Bookmarks extends Component {
 
             <div className='favorites'>
                 <div className='left-nav'>
-                    <DashMenu
-                    />
+                    <DashMenu />
                 </div>
 
                 <h3 className='dashboard'>Bookmarks Dashboard</h3>
