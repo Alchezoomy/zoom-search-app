@@ -7,9 +7,7 @@ export default class VideoList extends Component {
         return (
             <div className='video-list'>
                 <Link className='meeting-link' to={`/meeting/${this.props.video.uuid}`}>
-                    <VideoItem
-                        video={this.props.video}
-                    />
+                    <VideoItem video={this.props.video} />
                 </Link>
             </div>
         )

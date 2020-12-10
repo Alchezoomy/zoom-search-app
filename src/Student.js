@@ -3,11 +3,9 @@ import VideoList from './VideoList.js';
 import DashMenu from './DashMenu.js';
 
 import {
-
     fetchPublishedVideos,
     favoriteVideo,
     searchPublishedVideos,
-
 } from './Fetches.js';
 
 export default class Student extends Component {
@@ -60,8 +58,7 @@ export default class Student extends Component {
                     {
                         this.state.loading
                             ? <img src={'/loading-spinner.gif'} alt={''} />
-                            :
-                            this.state.allVideos.map(video =>
+                            : this.state.allVideos.map(video =>
                                 <div key={`${video.uuid}${Math.random()}`} >
                                     <VideoList
                                         video={video} />

@@ -17,7 +17,7 @@ export default class Favorites extends Component {
         await deleteFavoriteVideo(e.target.value, this.props.token);
         const favorites = await fetchFavorites(this.props.token)
         this.setState({
-            favorites: favorites,
+            favorites,
         })
     }
 
@@ -25,7 +25,7 @@ export default class Favorites extends Component {
     componentDidMount = async () => {
         const favorites = await fetchFavorites(this.props.token)
         this.setState({
-            favorites: favorites,
+            favorites,
         })
 
     }

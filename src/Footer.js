@@ -5,7 +5,11 @@ export default class Footer extends Component {
     render() {
         return (
                 <div className='footer'>
-                    <Link to='/aboutus' className='footer-link'><span className='footer-text'>About the Team</span></Link>
+                    <Link to='/aboutus' className='footer-link'>
+                        <span className='footer-text'>
+                            About the Team
+                        </span>
+                    </Link>
                 </div>
         )
     }

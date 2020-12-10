@@ -16,12 +16,12 @@ export default class VideoDetails extends Component {
   state = {
     loading: false,
     video: [],
-    search: "",
+    search: '',
     transcript: [],
     chats: [],
     timeStamp: Number(window.location.search.substr(1)) || 1,
     fuzzy: [],
-    favorited: "",
+    favorited: '',
   };
 
   ref = (player) => {
@@ -31,57 +31,30 @@ export default class VideoDetails extends Component {
   componentDidMount = async () => {
     await this.setState({ loading: true });
 
-    // const favorites = await fetchFavorites(
-    //   this.props.token
-    // );
-
-    const video = await fetchVideo(
-      this.props.match.params.id,
-      this.props.token
-    );
-
-    const transcript = await fetchTranscript(
-      this.props.match.params.id,
-      this.props.token
-    );
-
-    const chats = await fetchChat(this.props.match.params.id, this.props.token);
+    // as long as these don't need to be done in sequence, Promise.all is the best way to handle this
+    const [video, transcript, chats] = await Promise.all([
+      fetchVideo(
+        this.props.match.params.id,
+        this.props.token
+      ),
+      fetchTranscript(
+        this.props.match.params.id,
+        this.props.token
+      ),
+      fetchChat(
+        this.props.match.params.id, 
+        this.props.token)
+    ]);
 
     await this.setState({
       video: video,
       transcript: transcript,
       chats: chats,
       loading: false,
-      // favorites: favorites
     });
-
-    // this.determineFavorite();
 
     this.player.seekTo(this.state.timeStamp);
   };
-
-  // handleFavoriteButton = async (e) => {
-  //   if (!this.state.favorited === true) {
-  //     e.target.style.backgroundColor = "white";
-  //     e.target.style.color = "#2D8CFF";
-  //   } else if (this.state.favorited === true) {
-  //     e.target.style.backgroundColor = "#747487";
-  //     e.target.style.color = "white";
-  //   }
-  // };
-
-  // determineFavorite = async (e) => {
-  //   let isFavorite = false;
-  //   for(let favorite of this.state.favorites){
-  //     if(favorite.uuid === this.state.video.uuid){
-  //       isFavorite = true;
-  //     }
-  //   }
-
-  //   this.setState({
-  //     favorited: isFavorite
-  //   })
-  // };
 
   handleFavorite = async (e) => {
     const newFavorite = {
@@ -89,7 +62,7 @@ export default class VideoDetails extends Component {
       topic: this.state.video.topic,
       start_time: this.state.video.start_time,
       timestamp: "this.state.video.timestamp",
-      text: "",
+      text: '',
       owner_id: this.state.video.owner_id,
     };
 
@@ -105,16 +78,13 @@ export default class VideoDetails extends Component {
 
   handleBookmark = async (identifier, text, time_start, speaker, id) => {
     const newBookmark = {
-      id: id,
-      uuid: this.state.video.uuid,
-      topic: this.state.video.topic,
-      host_id: this.state.video.host_id,
-      start_time: this.state.video.start_time,
+      // this should spread all the video properties you need onto the new object
+      ...this.state.video,
+      id,
       time_start: time_start,
       speaker: "speaker",
       identifier: identifier,
       text: text,
-      owner_id: this.state.video.owner_id,
     };
 
     await bookmarkVideo(newBookmark, this.props.token);
@@ -138,9 +108,10 @@ export default class VideoDetails extends Component {
       shouldSort: true,
       ignoreLocation: true,
       threshold: 0.1,
-      keys: ["text"],
+      keys: ['text'],
     };
 
+    // super cool!
     const fuse = new Fuse(transcript, options);
     const fuzzysearch = fuse.search(search);
 
@@ -163,7 +134,7 @@ export default class VideoDetails extends Component {
         </div>
 
         {loading ? (
-          <img src={"/loading-spinner.gif"} alt={""} className="spinner" />
+          <img src={"/loading-spinner.gif"} alt={''} className="spinner" />
         ) : (
             <div>
               <h3 className="video-header">{video.topic}</h3>
@@ -201,23 +172,22 @@ export default class VideoDetails extends Component {
                   <h5 className="bookmark-timestamp">Bookmark Timestamp</h5>
                   <h4 className="transcript-header">Transcript</h4>
                   <div className="transcript">
-                    {!isSearching &&
-                      transcript.map((script) =>
-                        seedTranscript(
-                          script,
-                          this.handleTimeStamp,
-                          this.handleBookmark
-                        )
-                      )}
-                    {isSearching &&
-                      transcript.map((script) =>
+                      {!isSearching
+                        // seems like a ternery should work here?
+                        ? transcript.map((script) =>
+                            seedTranscript(
+                              script,
+                              this.handleTimeStamp,
+                              this.handleBookmark
+                            ))
+                        : transcript.map((script) =>
                         transcriptRender(
                           fuzzySet,
                           script,
                           this.handleTimeStamp,
                           this.handleBookmark
-                        )
-                      )}
+                        ))
+                      }
                   </div>
 
                   <div className="detail-search">
@@ -239,30 +209,37 @@ export default class VideoDetails extends Component {
   }
 }
 
-const seedTranscript = (script, handleTimeStamp, handleBookmark) => (
+// might make sense to move these to a utils file -- this file is getting pretty busy
+const seedTranscript = ({ 
+  identifier, 
+  text, 
+  time_start, 
+  speaker, 
+  id
+}, handleTimeStamp, handleBookmark) => (
   <div>
     <button
       className="bookmark-button"
       onClick={() =>
         handleBookmark(
-          script.identifier,
-          script.text,
-          script.time_start,
-          script.speaker,
-          script.id,
-          script.speaker
+          identifier,
+          text,
+          time_start,
+          speaker,
+          id,
+          speaker
         )
       }
     >
-      {timeConversion(script.time_start)}
+      {timeConversion(time_start)}
     </button>
     <div
       onClick={handleTimeStamp}
-      className={script.time_start}
-      key={script.id}
+      className={time_start}
+      key={id}
     >
       {" "}
-      {script.text}{" "}
+      {text}{" "}
     </div>
   </div>
 );
@@ -280,37 +257,43 @@ const transcriptRender = (
   }
 };
 
-const searchHighlight = (script, handleTimeStamp, handleBookmark) => (
+const searchHighlight = ({ 
+  identifier, 
+  text, 
+  time_start, 
+  speaker, 
+  id
+}, handleTimeStamp, handleBookmark) => (
   <div>
     <button
       className="bookmark-button"
       onClick={() =>
         handleBookmark(
-          script.identifier,
-          script.text,
-          script.time_start,
-          script.speaker,
-          script.id
+          identifier,
+          text,
+          time_start,
+          speaker,
+          id
         )
       }
     >
-      {timeConversion(script.time_start)}
+      {timeConversion(time_start)}
     </button>
     <div
       onClick={handleTimeStamp}
-      className={script.time_start}
-      key={script.id}
+      className={time_start}
+      key={id}
     >
-      {script.text}
+      {text}
     </div>
   </div>
 );
 
-const searchTranscript = (script, handleTimeStamp, handleBookmark) => (
+const searchTranscript = ({ time_start, id }, handleTimeStamp, handleBookmark) => (
   <div
     onClick={handleTimeStamp}
-    className={script.time_start}
-    key={script.id}
+    className={time_start}
+    key={id}
   ></div>
 );
 

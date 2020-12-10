@@ -39,6 +39,7 @@ export default class App extends Component {
     })
   }
 
+  // nice util! you could have also just passed down this.setState directly, but it's nice to make it explicit like this
   handleSetState = (stateObject) => {
     this.setState(stateObject);
   }

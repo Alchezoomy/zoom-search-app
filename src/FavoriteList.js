@@ -6,6 +6,7 @@ export default class FavoriteList extends Component {
     render() {
         return (
             <div className='video-list'>
+                {/* again, seems unecessarily obfuscating to have this component wrapping another component in a div */}
                 <FavoriteItem
                     handleDelete={this.props.handleDelete}
                     token={this.props.token}
